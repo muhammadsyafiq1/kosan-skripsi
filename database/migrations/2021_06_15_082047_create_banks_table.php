@@ -18,7 +18,7 @@ class CreateBanksTable extends Migration
             $table->integer('no_rek');
             $table->string('nama_bank');
             $table->string('nama_nasabah');
-            $table->string('status'); //active //inactive
+            $table->string('status')->default('aktif'); //active //inactive
             $table->timestamps();
         });
     }

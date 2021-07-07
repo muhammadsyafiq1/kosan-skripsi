@@ -14,7 +14,8 @@ class BankController extends Controller
      */
     public function index()
     {
-        //
+        $banks = Bank::all();
+        return view('pages.dashboard.bank.index', compact('banks'));
     }
 
     /**
@@ -35,7 +36,11 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->all(); 
+        $data['status'] = 'aktif';
+        Bank::create($data);
+        return redirect()->back()->with('status','Nomor Rekening Berhasil Ditambahkan.');
     }
 
     /**
@@ -55,9 +60,10 @@ class BankController extends Controller
      * @param  \App\Models\Bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bank $bank)
+    public function edit($id)
     {
-        //
+        $bank = Bank::findOrFail($id); 
+        return view('pages.dashboard.bank.edit', compact('bank'));
     }
 
     /**
@@ -67,9 +73,13 @@ class BankController extends Controller
      * @param  \App\Models\Bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bank $bank)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $item = Bank::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->back()->with('status',' Bank Berhasil Diupdate');
     }
 
     /**
@@ -80,6 +90,8 @@ class BankController extends Controller
      */
     public function destroy(Bank $bank)
     {
-        //
+        $data = Bank::findOrFail($id);
+        $data->delete();
+        return redirect()->back()->with('status','Bank Berhasil Dihapus');
     }
 }

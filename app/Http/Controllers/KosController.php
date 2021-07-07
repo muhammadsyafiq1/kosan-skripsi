@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kos;
 use Illuminate\Http\Request;
+use Auth;
 
 class KosController extends Controller
 {
@@ -14,7 +15,8 @@ class KosController extends Controller
      */
     public function index()
     {
-        //
+        $kosan = Kos::where('user_id', Auth::user()->id)->get();
+        return view('pages.dashboard.kos.index', compact('kosan'));
     }
 
     /**
@@ -24,7 +26,7 @@ class KosController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.dashboard.kos.create');
     }
 
     /**
