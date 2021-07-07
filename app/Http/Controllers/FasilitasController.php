@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fasilitas;
 use Illuminate\Http\Request;
+use Storage;
 
 class FasilitasController extends Controller
 {
@@ -14,7 +15,8 @@ class FasilitasController extends Controller
      */
     public function index()
     {
-        //
+        $fasilitas = Fasilitas::all();
+        return view('pages.dashboard.fasilitas.index', compact('fasilitas'));
     }
 
     /**
@@ -35,7 +37,14 @@ class FasilitasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_fasilitas' => 'required|max:20',
+        ]);
+
+        $data = $request->all();
+        $data['icon'] = $request->file('icon')->store('icon','public');
+        Fasilitas::create($data);
+        return redirect()->back()->with('status','Fasilitas Berhasil Ditambah');
     }
 
     /**
@@ -55,9 +64,10 @@ class FasilitasController extends Controller
      * @param  \App\Models\Fasilitas  $fasilitas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fasilitas $fasilitas)
+    public function edit($id)
     {
-        //
+        $fasilitas = Fasilitas::findOrFail($id);
+        return view('pages.dashboard.fasilitas.edit', compact('fasilitas'));
     }
 
     /**
@@ -67,9 +77,26 @@ class FasilitasController extends Controller
      * @param  \App\Models\Fasilitas  $fasilitas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fasilitas $fasilitas)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request->all()); die;
+        $request->validate([
+            'icon' => 'nullable|image',
+            'nama_fasilitas' => 'required|max:30',
+        ]);
+
+        $fasilitas = Fasilitas::findOrFail($id);
+        $fasilitas->nama_fasilitas = $request->nama_fasilitas;
+
+        if($request->hasFile('icon')){
+            if($request->icon && file_exists(storage_path('app/public/'.$request->icon))){
+                Storage::delete('public/'.$request->icon);
+            }
+            $file = $request->file('icon')->store('icon','public');
+            $fasilitas->icon = $file;
+        } 
+        $fasilitas->save();
+        return redirect()->back()->with('status','Fasilitas berhasil diubah');
     }
 
     /**
@@ -78,8 +105,10 @@ class FasilitasController extends Controller
      * @param  \App\Models\Fasilitas  $fasilitas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fasilitas $fasilitas)
+    public function destroy($id)
     {
-        //
+        $data = Fasilitas::findOrFail($id);
+        $data->delete();
+        return redirect()->back()->with('status','Fasilitas Berhasil Dihapus');
     }
 }

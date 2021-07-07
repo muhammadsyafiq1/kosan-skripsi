@@ -18,7 +18,7 @@
               </li> -->
               <li><a class="nav-link" href="{{route('user.index')}}"><i class="fa fa-users"></i> <span>Kelola Pengguna</span></a></li>
               <li><a class="nav-link" href="{{route('bank.index')}}"><i class="fa fa-credit-card"></i> <span>Kelola Rekening</span></a></li>
-              <li><a class="nav-link" href="{{route('kos.index')}}"><i class="fa fa-list"></i> <span>Kelola Fasilitas</span></a></li>
+              <li><a class="nav-link" href="{{route('fasilitas.index')}}"><i class="fa fa-list"></i> <span>Kelola Fasilitas</span></a></li>
               <li><a class="nav-link" href="{{route('kos.index')}}"><i class="fa fa-home"></i> <span>Kelola Kos</span></a></li>
             </ul>
         </aside>

@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('profile', [App\Http\Controllers\UserController::class, 'myProfile'])->name('myProfile');
     Route::post('ganti-password', [App\Http\Controllers\UserController::class, 'gantiPassword'])->name('gantiPassword');
     Route::resource('bank',App\Http\Controllers\BankController::class);
+    Route::resource('fasilitas',App\Http\Controllers\FasilitasController::class);
     Route::resource('kos',App\Http\Controllers\KosController::class);
 });
 

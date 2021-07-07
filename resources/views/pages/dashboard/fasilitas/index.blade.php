@@ -1,20 +1,20 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Kelola Fasilitas
+    Kelola fasilitas
 @stop
 
 @section('content')
 <section class="section">
           <div class="section-header">
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-bank active"><a href="{{route('home')}}">Dashboard</a></div>
-              <div class="breadcrumb-bank">Semua Bank</div>
+              <div class="breadcrumb active"><a href="{{route('home')}}">Dashboard</a></div> 
+              <div class="breadcrumb">Semua fasilitas</div>
             </div>
           </div>
           <div class="section-body">
             <div class="section-header-button mb-3">
-              <button href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add New</button>
+              <button href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Fasilitas Baru</button>
             </div>
             <div class="row ">
             
@@ -33,30 +33,34 @@
                       <table class="table table-striped" id="table_id">
                         <thead>
                             <tr>
-                                <th>Nama Pemilik</th>
-                                <th>Nomor Rekening</th>
-                                <th>Nama Bank</th>
+                                <th>Nama Fasilitas</th>
+                                <th>Icon</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($banks as $bank)
+                            @foreach($fasilitas as $fasilitas)
                             <tr>
-                                <td>{{$bank->nama_nasabah}}
-                                    <form action="{{route('bank.destroy',$bank->id)}}" method="post">
+                                <td>{{$fasilitas->nama_fasilitas}}
+                                    <form action="{{route('fasilitas.destroy',$fasilitas->id)}}" method="post">
                                         @csrf @method('delete')
                                         <div class="table-links">
                                         <div class="bullet"></div>
-                                        <a href="{{route('bank.edit',$bank->id)}}" data-toggle="modal">Edit</a>
+                                        <a href="{{route('fasilitas.edit',$fasilitas->id)}}">Edit</a>
                                         <div class="bullet"></div>
                                         <button onClick="return confirm('Are You Sure ?')" type="submit" class="text-danger btn btn-sm">Trash</button>
                                         </div>
                                     </form>                                   
                                 </td>
                                 <td>
-                                    {{$bank->no_rek}}
+                                    @if ($fasilitas->icon)
+                                        <img src="{{ Storage::url($fasilitas->icon) }}" class="rounded-circle mr-1" style="width:80px;">
+                                    @else
+                                        <img src="https://ui-avatars.com/api/?name={{ $fasilitas->nama_fasilitas }}" height="60" class="rounded-circle mr-1" />
+                                    @endif
                                 </td>
                                 <td>
-                                    {{$bank->nama_bank}}
+                                    {{$fasilitas->keterangan}}
                                 </td>
                             </tr>
                             @endforeach
@@ -81,19 +85,34 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{route('bank.index')}}" method="post">
+        <form action="{{route('fasilitas.index')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="nama_nasabah">Nama Pemilik</label>
-                <input type="text" class="form-control" id="nama_nasabah" name="nama_nasabah">
+                <label for="nama_fasilitas">Nama Fasilitas</label>
+                <input type="text" class="form-control @error('nama_fasilitas') is-invalid @enderror" id="nama_fasilitas" name="nama_fasilitas">
+                @error('nama_fasilitas')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="form-group">
-                <label for="nama_bank">Nama Bank</label>
-                <input type="text" name="nama_bank" class="form-control" id="nama_bank">
+                <label for="icon">Icon</label>
+                <input type="file" name="icon" class="form-control @error('icon') is-invalid @enderror" id="icon">
+                @error('icon')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="form-group">
-                <label for="no_rek">Nomor Rekekning</label>
-                <input type="number" name="no_rek" class="form-control" id="no_rek">
+                <label for="keterangan">Keterangan</label>
+                <textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control @error('keterangan') is-invalid @enderror"></textarea>
+                @error('keterangan')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
       </div>
       <div class="modal-footer">
