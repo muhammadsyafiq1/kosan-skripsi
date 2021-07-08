@@ -111,4 +111,10 @@ class FasilitasController extends Controller
         $data->delete();
         return redirect()->back()->with('status','Fasilitas Berhasil Dihapus');
     }
+
+    public function ajaxSearch(Request $request)
+    {
+        $data = Fasilitas::where('nama_fasilitas', 'LIKE', '%'.request('q'). '%')->paginate(20);
+        return response()->json($data);
+    }
 }

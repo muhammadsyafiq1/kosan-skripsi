@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kos;
+use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 use Auth;
+use Str;
 
 class KosController extends Controller
 {
@@ -37,7 +39,33 @@ class KosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all()); die;
+        $request->validate([
+            'nama_kos' => 'required|max:50|min:3',
+            'deskripsi_kos' => 'required',
+            'type_kos' => 'required',
+            'aturan_kos' => 'required',
+        ]);
+
+        $kos = new Kos;
+        $kos->nama_kos = $request->nama_kos;
+        $kos->alamat = $request->alamat;
+        $kos->deskripsi_kos = $request->deskripsi_kos;
+        $kos->type_kos = $request->type_kos;
+        $kos->luas_kos = $request->luas_kos;
+        $kos->aturan_kos = $request->aturan_kos;
+        $kos->user_id = Auth::user()->id;
+        $kos->slug = Str::slug($request->nama_kos);
+        $kos->save();
+        $kos->fasilitas()->attach($request->fasilitas);
+
+        return redirect(route('createGallery',$kos->id))->with('status','Harap Tambahkan Foto Mobil.');
+    }
+
+    public function createGallery($id)
+    {
+        $kos = Kos::with('gallery')->where('id', $id)->firstOrFail(); dd($kos); die;
+        // return view('dashboard.gallery.create', compact('cars'));
     }
 
     /**

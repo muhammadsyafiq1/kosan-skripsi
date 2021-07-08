@@ -18,8 +18,8 @@ class CreateKosTable extends Migration
             $table->integer('user_id');
             $table->string('nama_kos');
             $table->string('slug');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->longText('alamat');
             $table->string('type_kos'); //wanita //pria //campur
             $table->longText('aturan_kos');

@@ -20,6 +20,13 @@ class Kos extends Model
 
     public function fasilitas()
     {
-        return $this->belongsToMany('app\Models\Fasilitas');
+        return $this->belongsToMany('App\Models\Fasilitas');
     }
+
+    public function gallery()
+    {
+        return $this->hasMany(Gambar_kos::class, 'kos_id');
+    }
+
+    
 }
