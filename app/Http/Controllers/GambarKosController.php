@@ -36,7 +36,10 @@ class GambarKosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['gambar'] = $request->file('gambar')->store('gambar_kos','public');
+        Gambar_kos::create($data);
+        return redirect()->back()->with('status','Gambar Kos Berhasil Ditambah.');
     }
 
     /**
@@ -79,8 +82,10 @@ class GambarKosController extends Controller
      * @param  \App\Models\Gambar_kos  $gambar_kos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gambar_kos $gambar_kos)
+    public function deleteGalery($id)
     {
-        //
+        $data = Gambar_kos::findOrFail($id);
+        $data->delete();
+        return redirect()->back()->with('status','Gambar Kos Berhasil Dihapus');
     }
 }

@@ -8,8 +8,8 @@
 <section class="section">
           <div class="section-header">
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-bank active"><a href="{{route('home')}}">Dashboard</a></div> &nbsp; /  &nbsp;
-              <div class="breadcrumb-bank">{{$bank->nama_bank}}</div>
+              <div class="breadcrumb active"><a href="{{route('home')}}">Dashboard</a></div>
+              <div class="breadcrumb">{{$bank->nama_bank}}</div>
             </div>
           </div>
           <div class="section-body">

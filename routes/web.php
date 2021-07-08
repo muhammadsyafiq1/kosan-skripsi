@@ -25,6 +25,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('bank',App\Http\Controllers\BankController::class);
     Route::resource('fasilitas',App\Http\Controllers\FasilitasController::class);
     Route::resource('kos',App\Http\Controllers\KosController::class);
+    Route::resource('gallery',App\Http\Controllers\GambarKosController::class);
+    Route::get('delete-gallery/{id}', [App\Http\Controllers\GambarKosController::class, 'deleteGalery'])->name('delete-gallery');
+    Route::get('delete-kos/{id}', [App\Http\Controllers\KosController::class, 'deleteKos'])->name('delete-kos');
     Route::get('create-gallery/{id}', [App\Http\Controllers\KosController::class, 'createGallery'])->name('createGallery');
     Route::get('/ajax/fasilitas-mobil/search', [App\Http\Controllers\FasilitasController::class, 'ajaxSearch']);
 });

@@ -28,5 +28,10 @@ class Kos extends Model
         return $this->hasMany(Gambar_kos::class, 'kos_id');
     }
 
+    public function kamar()
+    {
+        return $this->hasMany(Kamar::class, 'kos_id');
+    }
+
     
 }

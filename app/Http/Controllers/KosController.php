@@ -17,7 +17,7 @@ class KosController extends Controller
      */
     public function index()
     {
-        $kosan = Kos::where('user_id', Auth::user()->id)->get();
+        $kosan = Kos::with('kamar')->where('user_id', Auth::user()->id)->paginate(9); 
         return view('pages.dashboard.kos.index', compact('kosan'));
     }
 
@@ -64,8 +64,8 @@ class KosController extends Controller
 
     public function createGallery($id)
     {
-        $kos = Kos::with('gallery')->where('id', $id)->firstOrFail(); dd($kos); die;
-        // return view('dashboard.gallery.create', compact('cars'));
+        $kos = Kos::with('gallery')->where('id', $id)->firstOrFail(); 
+        return view('pages.dashboard.kos.create-gallery', compact('kos'));
     }
 
     /**
@@ -108,8 +108,10 @@ class KosController extends Controller
      * @param  \App\Models\Kos  $kos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kos $kos)
+    public function deleteKos($id)
     {
-        //
+        $data = Kos::findOrFail($id);
+        $data->delete();
+        return redirect()->back()->with('status','Kos Berhasil Dihapus');
     }
 }

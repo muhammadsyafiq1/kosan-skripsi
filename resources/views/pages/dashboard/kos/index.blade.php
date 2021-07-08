@@ -16,6 +16,15 @@
             <div class="section-header-button mb-3">
               <a href="{{route('kos.create')}}" class="btn btn-primary">Tambah kos</a>
             </div>
+            <div class="row">
+              <div class="col-12">
+              @if(session('status'))
+                <div class="alert alert-warning col-12" role="alert">
+                    {{session('status')}}
+                </div>
+              @endif
+              </div>
+            </div>
             <!--  -->
                 <div class="row">
                     @foreach($kosan as $kos)
@@ -23,8 +32,8 @@
                         <div class="card" style="width: 20rem;">
                         <div class="gallery-container">
                             <!-- <img class="card-img-top" src="{{Storage::url($kos->gallery->first()->foto ?? '')}}" alt="Foto belum ada"> -->
-                            <img class="card-img-top" src="/backend/assets/img/unsplash/p.jpg" alt="Foto belum ada">
-                            <a href="#" class="delete-gallery" onclick="return confirm('Yakin ingin menghapus {{$kos->nama_kos}} ?')">
+                            <img class="card-img-top" src="{{Storage::url($kos->gallery->first()->gambar ?? '')}}" alt="Foto belum ada">
+                            <a href="{{route('delete-kos',$kos->id)}}" class="delete-gallery" onclick="return confirm('Yakin ingin menghapus {{$kos->nama_kos}} ?')">
                                 <img src="/backend/assets/img/icon-delete.svg">
                             </a>
                         </div>
@@ -39,15 +48,30 @@
                             </div>
                             </div>
                             <p class="card-text">
-                                <li class="text-muted">Penghuni : {{$kos->type_kos}}</li>
-                                <li class="text-muted">Total Kamar : 5</li>
-                                <li class="text-muted">Kamar Kosong : 3</li>
+                              <ul class="list-group">
+                                <li class="text-muted"><span class="float-right">Penghuni</span> : <span class="float-left">{{$kos->type_kos}}</span></li>
+                                <li class="text-muted">Total Kamar : {{$kos->kamar->count()}}</li>
+                                @foreach($kos->kamar as $k)
+                                   @php
+                                    $tersedia = $k->where('status','=','tersedia')->count();
+                                   @endphp
+                                @endforeach
+                                   <li class="text-muted">Kamar Kosong : {{$tersedia}}</li>
+                              </ul>
                             </p>
+                            @if($kos->status == 'nonaktif' )
+                            <div class="text-muted mb-3"><i class="text-danger">Menuggu Approve Admin</i></div>
+                            @endif
                             <a href="#" class="btn btn-sm btn-block btn-info btn-shadow">Detail / Edit</a>
                         </div>
+                      </div>
                     </div>
-                        </div>
                     @endforeach
+                    <div class="row">
+                      <div class="col-12 text-center mt-4">
+                      {{$kosan->links()}}
+                      </div>
+                    </div>
                 </div>
             <!--  -->
             </div>
