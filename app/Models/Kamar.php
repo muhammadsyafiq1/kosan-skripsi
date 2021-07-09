@@ -18,4 +18,9 @@ class Kamar extends Model
     {
         return $this->belongsTo(Kos::class, 'kos_id');
     }
+
+    public function galleryKamar()
+    {
+        return $this->hasMany(Gambar_kamar::class, 'kamar_id');
+    }
 }

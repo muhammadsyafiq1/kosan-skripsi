@@ -85,9 +85,10 @@ class KosController extends Controller
      * @param  \App\Models\Kos  $kos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kos $kos)
+    public function edit($id)
     {
-        //
+        $kos = Kos::findOrFail($id);
+        return view('pages.dashboard.kos.edit', compact('kos'));
     }
 
     /**
@@ -97,9 +98,34 @@ class KosController extends Controller
      * @param  \App\Models\Kos  $kos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kos $kos)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_kos' => 'required',
+            'alamat' => 'required',
+            'type_kos' => 'required',
+            'aturan_kos' => 'required',
+            'deskripsi_kos' => 'required',
+            'luas_kos' => 'nullable',
+
+        ]);
+
+        $kos =  Kos::findOrFail($id);
+        $kos->nama_kos = $request->nama_kos;
+        $kos->alamat = $request->alamat;
+        $kos->type_kos = $request->type_kos;
+        $kos->aturan_kos = $request->aturan_kos;
+        $kos->deskripsi_kos = $request->deskripsi_kos;
+        $kos->luas_kos = $request->luas_kos;
+
+        // $kos->biaya_supir = $request->biaya_supir;
+
+        $kos->user_id = Auth::user()->id;
+        $kos->slug = Str::slug($request->nama_kos);
+        $kos->save();
+        $kos->fasilitas()->sync($request->fasilitas);
+
+        return redirect()->back()->with('status','Kos Berhasil diupdate');
     }
 
     /**

@@ -35,7 +35,10 @@ class KamarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['status'] = 'tersedia';
+        Kamar::create($data);
+        return redirect()->back()->with('status','Kamar Berhasil Ditambahkan');
     }
 
     /**
@@ -78,8 +81,10 @@ class KamarController extends Controller
      * @param  \App\Models\Kamar  $kamar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kamar $kamar)
+    public function destroy($id)
     {
-        //
+        $kamar = Kamar::findOrFail($id);
+        $kamar->delete();
+        return redirect()->back()->with('status','Kamar Berhasil Dihapus');
     }
 }

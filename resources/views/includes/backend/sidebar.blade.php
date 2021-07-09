@@ -20,6 +20,8 @@
               <li><a class="nav-link" href="{{route('bank.index')}}"><i class="fa fa-credit-card"></i> <span>Kelola Rekening</span></a></li>
               <li><a class="nav-link" href="{{route('fasilitas.index')}}"><i class="fa fa-list"></i> <span>Kelola Fasilitas</span></a></li>
               <li><a class="nav-link" href="{{route('kos.index')}}"><i class="fa fa-home"></i> <span>Kelola Kos</span></a></li>
+              <li><a class="nav-link" href="{{route('kos-tersimpan.index')}}"><i class="fa fa-heart"></i> <span>Kos Favorit</span></a></li>
+              <li><a class="nav-link" href=""><i class="fa fa-list"></i> <span>Kelola Blog</span></a></li>
             </ul>
         </aside>
       </div>

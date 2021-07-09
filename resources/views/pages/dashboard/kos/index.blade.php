@@ -8,8 +8,8 @@
 <section class="section">
           <div class="section-header">
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-bank active"><a href="{{route('home')}}">Dashboard</a></div>
-              <div class="breadcrumb-bank">Semua Bank</div>
+              <div class="breadcrumb active"><a href="{{route('home')}}">Dashboard</a></div>
+              <div class="breadcrumb">Semua Kos</div>
             </div>
           </div>
           <div class="section-body">
@@ -62,7 +62,7 @@
                             @if($kos->status == 'nonaktif' )
                             <div class="text-muted mb-3"><i class="text-danger">Menuggu Approve Admin</i></div>
                             @endif
-                            <a href="#" class="btn btn-sm btn-block btn-info btn-shadow">Detail / Edit</a>
+                            <a href="{{route('kos.edit',$kos->id)}}" class="btn btn-sm btn-block btn-info btn-shadow">Settings</a>
                         </div>
                       </div>
                     </div>

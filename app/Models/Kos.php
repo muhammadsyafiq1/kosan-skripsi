@@ -33,5 +33,10 @@ class Kos extends Model
         return $this->hasMany(Kamar::class, 'kos_id');
     }
 
+    public function kosTersimpan()
+    {
+        return $this->hasMany(Kos_tersimpan::class, 'kos_id');
+    }
+
     
 }

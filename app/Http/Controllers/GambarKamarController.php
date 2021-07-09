@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\gambar_kamar;
 use Illuminate\Http\Request;
+use App\Models\Kamar;
 
 class GambarKamarController extends Controller
 {
@@ -15,6 +16,19 @@ class GambarKamarController extends Controller
     public function index()
     {
         //
+    }
+
+    public function createGalleryKamar($id)
+    {
+        $kamar = Kamar::with('kos')->findOrFail($id);
+        return view('pages.dashboard.kamar.create-gallery', compact('kamar'));
+    }
+
+    public function deleteGalleryKamar ($id)
+    {
+        $gambar_kamar = Gambar_kamar::findOrFail($id);
+        $gambar_kamar->delete();
+        return redirect()->back()->with('status','Gambar Kamar Berhasil Dihapus');
     }
 
     /**
@@ -35,7 +49,14 @@ class GambarKamarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'gambar' => 'required|image'
+        ]);
+        $data = $request->all(); 
+        $data['gambar'] = $request->file('gambar')->store('gallery-kamar','public');
+        Gambar_kamar::create($data);
+
+        return redirect()->back()->with('status','Gambar kamar berhasil dibuat');
     }
 
     /**

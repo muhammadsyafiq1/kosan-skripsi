@@ -128,7 +128,7 @@
       $('.fasilitas').select2({
         placeholder: 'Loading ...',
         ajax: {
-          url: "http://127.0.0.1:8000/ajax/fasilitas-mobil/search",
+          url: "http://127.0.0.1:8000/ajax/fasilitas-kos/search",
           delay: 450,
           processResults: function({data}) {
             return {
@@ -142,17 +142,6 @@
           },
           cache: true
         }
-      });
-    });
-
-     $(function(){
-      $(".radio1").click(function(){
-        $(".form-biaya-supir").hide()
-          if($(this).val() == "0"){
-            $(".form-biaya-supir").show();
-          }else {
-            $(".form-biaya-supir").hidden();
-          }
       });
     });
   </script>

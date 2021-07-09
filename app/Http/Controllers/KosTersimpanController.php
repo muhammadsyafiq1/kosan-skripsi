@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kos_tersimpan;
 use Illuminate\Http\Request;
+use Auth;
 
 class KosTersimpanController extends Controller
 {
@@ -14,7 +15,9 @@ class KosTersimpanController extends Controller
      */
     public function index()
     {
-        //
+        
+		$kos = Kos_tersimpan::where('user_id', Auth::user()->id)->get(); 
+        return view('pages.dashboard.favorit.index', compact('kos'));
     }
 
     /**
@@ -78,8 +81,10 @@ class KosTersimpanController extends Controller
      * @param  \App\Models\Kos_tersimpan  $kos_tersimpan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kos_tersimpan $kos_tersimpan)
+    public function delete($id)
     {
-        //
+        $data = Kos_tersimpan::findOrFail($id);
+        $data->delete();
+        return redirect()->back()->with('status','Kos Favorit Berhasl Dihapus');
     }
 }

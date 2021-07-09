@@ -17,7 +17,7 @@ class CreateGambarKamarsTable extends Migration
             $table->id();
             $table->integer('kos_id');
             $table->string('gambar');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }
