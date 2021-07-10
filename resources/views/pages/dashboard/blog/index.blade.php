@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Kelola Fasilitas
+    Kelola Blogger
 @stop
 
 @section('content')
@@ -9,7 +9,7 @@
           <div class="section-header">
             <div class="section-header-breadcrumb">
               <div class="breadcrumb active"><a href="{{route('home')}}">Dashboard</a></div>
-              <div class="breadcrumb">Semua Bank</div>
+              <div class="breadcrumb">kelola Blogger</div>
             </div>
           </div>
           <div class="section-body">
@@ -33,30 +33,38 @@
                       <table class="table table-striped" id="table_id">
                         <thead>
                             <tr>
-                                <th>Nama Pemilik</th>
-                                <th>Nomor Rekening</th>
-                                <th>Nama Bank</th>
+                                <th>Author</th>
+                                <th>Title</th>
+                                <th>Gambar</th>
+                                <th>Slug</th>
+                                <th>Kategori</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($banks as $bank)
+                            @foreach($blogs as $blog)
                             <tr>
-                                <td>{{$bank->nama_nasabah}}
-                                    <form action="{{route('bank.destroy',$bank->id)}}" method="post">
+                                <td>{{$blog->author}}
+                                    <form action="{{route('blog.destroy',$blog->id)}}" method="post">
                                         @csrf @method('delete')
                                         <div class="table-links">
                                         <div class="bullet"></div>
-                                        <a href="{{route('bank.edit',$bank->id)}}" data-toggle="modal">Edit</a>
+                                        <a href="{{route('blog.edit',$blog->id)}}">Edit</a>
                                         <div class="bullet"></div>
                                         <button onClick="return confirm('Are You Sure ?')" type="submit" class="text-danger btn btn-sm">Trash</button>
                                         </div>
                                     </form>                                   
                                 </td>
                                 <td>
-                                    {{$bank->no_rek}}
+                                    {{$blog->title}}
                                 </td>
                                 <td>
-                                    {{$bank->nama_bank}}
+                                    <img src="{{Storage::url($blog->gambar)}}" alt="" style="width:100px;">
+                                </td>
+                                <td>
+                                    {{$blog->slug}}
+                                </td>
+                                <td>
+                                    {{$blog->kategori}}
                                 </td>
                             </tr>
                             @endforeach
@@ -72,28 +80,41 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog dialog-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Rekening</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Blog</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{route('bank.store')}}" method="post">
+        <form action="{{route('blog.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="nama_nasabah">Nama Pemilik</label>
-                <input type="text" class="form-control" id="nama_nasabah" name="nama_nasabah">
+                <label for="title">Title</label>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title">
+                
             </div>
             <div class="form-group">
-                <label for="nama_bank">Nama Bank</label>
-                <input type="text" name="nama_bank" class="form-control" id="nama_bank">
+                <label for="author">Penulis</label>
+                <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author">
+               
             </div>
             <div class="form-group">
-                <label for="no_rek">Nomor Rekekning</label>
-                <input type="number" name="no_rek" class="form-control" id="no_rek">
+                <label for="gambar">Gambar</label>
+                <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
+               
+            </div>
+            <div class="form-group">
+                <label for="kategori">kategori</label>
+                <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori">
+               
+            </div>
+            <div class="form-group">
+                <label for="Isi">Isi</label>
+                <textarea name="isi" id="editor"></textarea>
+                
             </div>
       </div>
       <div class="modal-footer">
