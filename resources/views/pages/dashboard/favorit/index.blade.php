@@ -24,7 +24,7 @@
             </div>
             <!--  -->
             <div class="row">
-                    @foreach($kos as $kos)
+                    @forelse($kos as $kos)
                         <div class="col-4">
                         <div class="card" style="width: 20rem;">
                         <div class="gallery-container">
@@ -47,7 +47,18 @@
                         </div>
                       </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="row  col-12">
+                      <div class="alert alert-warning text-center">
+                        Kos Favorit Belum Ada
+                      </div>
+                    </div>
+                    @endforelse
+                    <div class="row">
+                      <div class="col-12 text-center mt-4">
+                      {{$kos->links()}}
+                      </div>
+                    </div>
                 </div>
             <!--  -->
             </div>

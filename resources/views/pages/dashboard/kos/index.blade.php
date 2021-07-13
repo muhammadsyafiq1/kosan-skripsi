@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Kelola Bank
+    Kelola Kos
 @stop
 
 @section('content')
@@ -41,23 +41,19 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between" style="font-weight: bold;">
                                 <div class="text-success">
-                                <h5>{{$kos->nama_kos}}</h5>
+                                <h5 class="text-uppercase">{{$kos->nama_kos}}</h5>
                             </div>
                             <div class="text-warning">
-                                 5 / Kamar
+                                @if($kos->status == 'aktifkan')
+                                  <span class="badge badge-warning">Aktif</span>
+                                @endif
                             </div>
-                            </div>
+                          </div>
                             <p class="card-text">
                               <ul class="list-group">
-                                <li class="text-muted"><span class="float-right">Penghuni</span> : <span class="float-left">{{$kos->type_kos}}</span></li>
+                                <li class="text-muted">Penghuni Kos : {{$kos->type_kos}}</li>
                                 <li class="text-muted">Total Kamar : {{$kos->kamar->count()}}</li>
-                                @foreach($kos->kamar as $k)
-                                   @php
-                                    $tersedia = $k->where('status','=','tersedia')->count();
-                                   @endphp
-                                @endforeach
-                                   <li class="text-muted">Kamar Kosong : {{$tersedia}}</li>
-                              </ul>
+                                <li class="text-muted">Last Update : {{date('D-m. Y',strtotime($kos->updated_at))}}</li>
                             </p>
                             @if($kos->status == 'nonaktif' )
                             <div class="text-muted mb-3"><i class="text-danger">Menuggu Approve Admin</i></div>

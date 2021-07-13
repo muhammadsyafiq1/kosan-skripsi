@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kamar;
 use Illuminate\Http\Request;
+use App\Models\Fasilitas;
 
 class KamarController extends Controller
 {
@@ -35,10 +36,23 @@ class KamarController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $data['status'] = 'tersedia';
-        Kamar::create($data);
+        // dd($request->all()); die;
+        $request->validate([
+            'biaya_perbulan' => 'required',
+        ]);
+
+        $kamar = new Kamar;
+        $kamar->status = 'tersedia';
+        $kamar->kos_id = $request->kos_id;
+        $kamar->luas_kamar = $request->luas_kamar;
+        $kamar->ukuran_kamar = $request->ukuran_kamar;
+        $kamar->jumlah_kasur = $request->jumlah_kasur;
+        $kamar->biaya_perbulan = $request->biaya_perbulan;
+        $kamar->save();
+        $kamar->fasilitas()->attach($request->fasilitas);
+
         return redirect()->back()->with('status','Kamar Berhasil Ditambahkan');
+
     }
 
     /**

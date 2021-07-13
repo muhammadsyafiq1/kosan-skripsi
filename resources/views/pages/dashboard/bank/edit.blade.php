@@ -55,7 +55,8 @@
                             </span>
                             @enderror
                         </div>
-                        <button class="btn btn-sm btn-block text-center btn-success" type="submit">Ubah</button>
+                            <button class="btn btn-sm btn-block text-center btn-success" type="submit">Ubah</button>
+                            <a href="{{route('bank.index')}}" class="mt-2 btn btn-sm btn-block text-center btn-secondary" type="submit">Kembali</a>
                         </form>
                     </div>
                 </div>

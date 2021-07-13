@@ -17,8 +17,33 @@ class KosController extends Controller
      */
     public function index()
     {
+        // pemilik kos
         $kosan = Kos::with('kamar')->where('user_id', Auth::user()->id)->paginate(9); 
         return view('pages.dashboard.kos.index', compact('kosan'));
+    }
+
+    public function tableKos()
+    {
+        $kosan = Kos::all();
+        return view('pages.dashboard.admin.kos.index', compact('kosan'));
+    }
+
+    public function aktifkan ($id)
+    {
+        $kos = Kos::findOrFail($id);
+        $kos->status = 'aktifkan';
+        $kos->save();
+
+        return  redirect()->back()->with('status','Kos Berhasil Diaktifkan');
+    }
+
+    public function nonaktifkan ($id)
+    {
+        $kos = Kos::findOrFail($id);
+        $kos->status = 'nonaktifkan';
+        $kos->save();
+
+        return  redirect()->back()->with('status','Kos Berhasil Dinonaktifkan');
     }
 
     /**
@@ -59,7 +84,7 @@ class KosController extends Controller
         $kos->save();
         $kos->fasilitas()->attach($request->fasilitas);
 
-        return redirect(route('createGallery',$kos->id))->with('status','Harap Tambahkan Foto Mobil.');
+        return redirect(route('createGallery',$kos->id))->with('status','Harap Tambahkan Foto Kos.');
     }
 
     public function createGallery($id)
@@ -67,6 +92,7 @@ class KosController extends Controller
         $kos = Kos::with('gallery')->where('id', $id)->firstOrFail(); 
         return view('pages.dashboard.kos.create-gallery', compact('kos'));
     }
+    
 
     /**
      * Display the specified resource.

@@ -109,7 +109,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <button class="btn btn-sm btn-block text-center btn-success" type="submit">Ubah</button>
+                            <button class="btn btn-sm btn-block text-center btn-success" type="submit">Submit</button>
                         </form>
                     </div>
                 </div>

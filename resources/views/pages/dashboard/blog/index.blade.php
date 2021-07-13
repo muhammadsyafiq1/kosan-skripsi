@@ -94,27 +94,47 @@
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title">
-                
+                @error('title')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="author">Penulis</label>
                 <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author">
-               
+                @error('author')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="gambar">Gambar</label>
                 <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
-               
+                @error('gambar')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="kategori">kategori</label>
                 <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori">
-               
+                @error('kategori')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="Isi">Isi</label>
                 <textarea name="isi" id="editor"></textarea>
-                
+                @error('isi')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
       </div>
       <div class="modal-footer">

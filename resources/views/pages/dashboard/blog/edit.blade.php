@@ -58,14 +58,14 @@
                         <div class="form-group">
                             <label for="gambar">gambar</label>
                             <input type="file" name="gambar" class="form-control @error('gambar') is-invalid @enderror"> <br>
-                            <i>Kosongkan Inputan Jika tidak ingin rubah gambar.</i>
-                            <br>
-                            <img src="{{Storage::url($blog->gambar)}}" alt="" style="width: 200px;">
                             @error('gambar')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                            <i>Kosongkan Inputan Jika tidak ingin rubah gambar.</i>
+                            <br>
+                            <img src="{{Storage::url($blog->gambar)}}" alt="" style="width: 200px;"> <br>
                         </div>
                         <div class="form-group">
                             <label for="Isi">Isi</label>
@@ -77,6 +77,7 @@
                             @enderror
                         </div>
                         <button class="btn btn-sm btn-block text-center btn-success" type="submit">Ubah</button>
+                        <a href="{{route('blog.index')}}" class="btn btn-sm btn-block text-center btn-secondary" type="submit">Kembali</a>
                         </form>
                     </div>
                 </div>

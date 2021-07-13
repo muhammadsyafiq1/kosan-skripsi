@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/detail/{slug}', [App\Http\Controllers\HomeController::class, 'detail'])->name('kos.detail');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
     Route::resource('user', App\Http\Controllers\UserController::class);
@@ -30,6 +31,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('kos-tersimpan',App\Http\Controllers\KosTersimpanController::class);
     Route::resource('gambar-kamar',App\Http\Controllers\GambarKamarController::class);
     Route::resource('blog',App\Http\Controllers\BlogController::class);
+
+    Route::get('semua-kos',[App\Http\Controllers\KosController::class, 'tableKos'])->name('semua-kos');
+    Route::get('aktifkan-kos/{id}',[App\Http\Controllers\KosController::class, 'aktifkan'])->name('kos.aktifkan');
+    Route::get('nonaktifkan-kos/{id}',[App\Http\Controllers\KosController::class, 'nonaktifkan'])->name('kos.nonaktifkan');
     Route::get('kos-tersimpan/{id}/delete',[App\Http\Controllers\KosTersimpanController::class, 'delete'])->name('delete.kos-tersimpan');
     Route::get('delete-gallery/{id}', [App\Http\Controllers\GambarKosController::class, 'deleteGalery'])->name('delete-gallery');
     Route::get('delete-kos/{id}', [App\Http\Controllers\KosController::class, 'deleteKos'])->name('delete-kos');

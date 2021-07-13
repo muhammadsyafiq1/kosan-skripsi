@@ -46,7 +46,7 @@
                                         @csrf @method('delete')
                                         <div class="table-links">
                                         <div class="bullet"></div>
-                                        <a href="{{route('bank.edit',$bank->id)}}" data-toggle="modal">Edit</a>
+                                        <a href="{{route('bank.edit',$bank->id)}}">Edit</a>
                                         <div class="bullet"></div>
                                         <button onClick="return confirm('Are You Sure ?')" type="submit" class="text-danger btn btn-sm">Trash</button>
                                         </div>

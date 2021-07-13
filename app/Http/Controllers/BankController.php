@@ -88,7 +88,7 @@ class BankController extends Controller
      * @param  \App\Models\Bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bank $bank)
+    public function destroy($id)
     {
         $data = Bank::findOrFail($id);
         $data->delete();

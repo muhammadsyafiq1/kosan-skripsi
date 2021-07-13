@@ -17,4 +17,9 @@ class Fasilitas extends Model
     {
         return $this->belongsToMany('app\Models\Kos');
     }
+
+    public function kamar()
+    {
+        return $this->belongsToMany('app\Models\Kamar');
+    }
 }

@@ -111,6 +111,7 @@
                                     <button class="btn btn-sm btn-success text-center btn-block" type="submit">
                                         Simpan
                                     </button>
+                                    <a href="{{route('kos.index')}}" class="mt-2 btn btn-sm btn-block text-center btn-secondary" type="submit">Kembali</a>
                                 </div>
                             </form>
                         </div>
@@ -180,6 +181,7 @@
                             <th>Ukuran Kamar</th>
                             <th>Jml Kasur</th>
                             <th>Biaya</th>
+                            <th>Fasilitas</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -208,6 +210,15 @@
                                 @else
                                     <span class="text-danger">Digunakan</span>
                                 @endif
+                            </td>
+                            <td>
+                                <ul>
+                                    @foreach($kamar->fasilitas as $fasilitas)
+                                    <li>
+                                        {{$fasilitas->nama_fasilitas}} &middot;
+                                    </li>
+                                    @endforeach
+                                </ul>
                             </td>
                             <td>
                                 <a href="{{route('gallery.kamar',$kamar->id)}}" class="btn btn-sm btn-info">
@@ -254,8 +265,16 @@
                         <label for="biaya_perbulan">Biaya / Bulan</label>
                         <input type="text" class="form-control @error('biaya_perbulan') is-invalid @enderror" id="biaya_perbulan" name="biaya_perbulan">
                     </div>
-                @csrf
-                </div>
+                    <div class="form-group">
+                            <label for="fasilitas">Fasilitas Kos</label>
+                            <select style="width: 500px;" name="fasilitas[]" class="form-control @error('fasilitas') is-invalid @enderror fasilitas-kamar" multiple></select>
+                            @error('fasilitas')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -283,6 +302,30 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <script>
+    $(document).ready(function () {
+      $('.fasilitas-kamar').select2({
+        placeholder: 'Loading ...',
+        ajax: {
+          url: "http://127.0.0.1:8000/ajax/fasilitas-kos/search",
+          delay: 450,
+          processResults: function({data}) {
+            return {
+              results: $.map(data, function (item) {
+                return {
+                  text: `${item.nama_fasilitas}`,
+                  id: item.id,
+                }
+              })
+            };
+          },
+          cache: true
+        }
+      });
+    });
+  </script>
+
+  <script>
+    // edit kos
     $(document).ready(function () {
       $('.fasilitas').select2({
         placeholder: 'Loading ...',
