@@ -14,7 +14,8 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        //
+        $testimonials = Testimonial::where('user_id', \Auth::user()->id)->get(); dd($testimonials);
+        return view('pages.dashboard.testimonial.index', compact('testimonials'));
     }
 
     /**

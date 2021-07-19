@@ -8,7 +8,7 @@
     <!--/ Carousel Star /-->
   <div class="intro intro-carousel">
     <div id="carousel" class="owl-carousel owl-theme">
-      <div class="carousel-item-a intro-item bg-image" style="width:100%; background-image: url('{{Storage::url($kos->gallery->first()->gambar ?? '')}}')">
+      <div class="carousel-item-a intro-item bg-image" style="height:650px; background-image: url('{{Storage::url($kos->gallery->first()->gambar ?? '')}}')">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">

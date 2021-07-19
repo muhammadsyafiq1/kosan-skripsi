@@ -10,7 +10,7 @@ class Kos_tersimpan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kos_id','user_id'
+        'kos_id','user_id','testimonial'
     ];
 
     public function kos()

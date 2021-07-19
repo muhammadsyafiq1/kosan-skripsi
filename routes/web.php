@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('gambar-kamar',App\Http\Controllers\GambarKamarController::class);
     Route::resource('blog',App\Http\Controllers\BlogController::class);
     Route::resource('booking',App\Http\Controllers\BookingController::class);
+    Route::resource('testimonial',App\Http\Controllers\TestimonialController::class);
 
     Route::get('booking/{idKos}/{idKamar}/', [App\Http\Controllers\HomeController::class, 'getBooking']);
     Route::get('terima-booking/{idKamar}/{idBooking}/', [App\Http\Controllers\BookingController::class, 'terimaBooking'])->name('terima.booking');

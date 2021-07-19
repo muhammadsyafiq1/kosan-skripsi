@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kos;
 use App\Models\Blog;
 use App\Models\Bank;
+use App\Models\Kamar;
 use App\Models\Booking_detail;
 
 class HomeController extends Controller
@@ -71,7 +72,10 @@ class HomeController extends Controller
 
     public function getBooking($idKos, $idKamar)
     {
-        return 'ok';
+        $kamar = Kamar::findOrFail($idKamar);
+        $kos = Kos::findOrFail($idKos);
+        $banks = Bank::where('user_id', $kos->user_id)->get();
+        return view('pages.checkout', compact('kamar','banks'));
     }
 
     

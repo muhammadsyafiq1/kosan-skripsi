@@ -22,6 +22,7 @@
               <li><a class="nav-link" href="{{route('bank.index')}}"><i class="fa fa-credit-card"></i> <span>Kelola Rekening</span></a></li>
               @else
               <li><a class="nav-link" href="{{route('riwayat-kos-saya')}}"><i class="fa fa-list"></i> <span>Riwayat Kos Saya</span></a></li>
+              <li><a class="nav-link" href="{{route('testimonial.index')}}"><i class="fa fa-comment"></i> <span>Beri Testimonial</span></a></li>
               <li><a class="nav-link" href="{{route('kos-tersimpan.index')}}"><i class="fa fa-heart"></i> <span>Kos Favorit</span></a></li>
               @endif
             </ul>

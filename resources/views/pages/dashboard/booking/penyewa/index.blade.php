@@ -24,6 +24,7 @@
                       <table class="table table-striped" id="table_id">
                         <thead>
                             <tr>
+                                <th>Print</th>
                                 <th>Nama Kos</th>
                                 <th>ID Kamar</th>
                                 <th>Periode Sewa</th>
@@ -37,20 +38,25 @@
                                 @php  $dateNow = date('m-d-Y') @endphp
                                 @php  $deadline = date('m-d-Y',strtotime($booking->booking->habis_sewa)) @endphp
                             <tr>
-                                <td>{{$booking->kos->nama_kos}}
+                                <td>
+                                  <a href="" class="btn btn-sm btn-danger px-3">
+                                    <i class="fa fa-print"></i>
+                                  </a>
+                                </td>
+                                <td>{{$booking->kos->nama_kos ?? 'tidak tersedia'}}
                                     <div class="table-links">
                                     <div class="bullet"></div>
-                                    <a href="{{route('kos.detail',$booking->kos->slug)}}" class="text-warning">Detail Kos</a>
+                                    <a href="{{route('kos.detail',$booking->kos->slug ?? '')}}" class="text-warning">Detail Kos</a>
                                     </div>                                
                                 </td>
                                 <td>
-                                     <div class="badge badge-success">{{$booking->kamar->id}}</div>
+                                     <div class="badge badge-success">{{$booking->kamar->id ?? ''}}</div>
                                 </td>
                                 <td>
-                                    {{date('d / M / Y',strtotime($booking->booking->mulai_sewa))}} - <br>  {{date('d / M / Y',strtotime($booking->booking->habis_sewa))}}  
+                                    {{date('d / M / Y',strtotime($booking->booking->mulai_sewa ?? ''))}} - <br>  {{date('d / M / Y',strtotime($booking->booking->habis_sewa ?? ''))}}  
                                 </td>
                                 <td>
-                                    <span class="text-info">{{$booking->lama_sewa}} Bulan</span> 
+                                    <span class="text-info">{{$booking->lama_sewa ?? ''}} Bulan</span> 
                                 </td>
                                 <td>
                 

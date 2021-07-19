@@ -16,7 +16,7 @@ class KosTersimpanController extends Controller
     public function index()
     {
         
-		$kos = Kos_tersimpan::where('user_id', Auth::user()->id)->paginate(9); 
+		$kos = Kos_tersimpan::where('user_id', Auth::user()->id)->get(); 
         return view('pages.dashboard.favorit.index', compact('kos'));
     }
 

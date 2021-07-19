@@ -39,11 +39,11 @@
         <div class="col-sm-12 mb-4">
           <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
             <div class="carousel-item-b">
-              <img src="{{Storage::url($kos->gallery->first()->gambar ?? '')}}" alt="" class="w-100">
+              <img src="{{Storage::url($kos->gallery->first()->gambar ?? '')}}" alt="" style="height: 500px;">
             </div>
             @foreach($kos->gallery as $gallery)
               <div class="carousel-item-b">
-                <img src="{{Storage::url($gallery->gambar)}}" alt="" class="w-100">
+                <img src="{{Storage::url($gallery->gambar)}}" alt=""  style="height: 500px;">
               </div>
             @endforeach
           </div>
@@ -247,11 +247,11 @@
                   Rp. {{number_format($kamar->biaya_perbulan)}} / <span class="text-white b;l t6yukaq ">Bulan</span>
                 </div>
                 @auth
-                  
+                  @if($kos->is_booking == 1)
                   <a href="{{url('booking/' . $kos->id . '/' . $kamar->id . '/')}}" class=" btn-block btn-sm btn-primary text-center">
                     <span class="text-white">Booking</span>
                   </a>
-                  
+                  @endif
                 @else
                  
                   <a class=" btn-block btn-sm btn-primary text-center" href="{{route('login')}}"onClick="return confirm('Anda Harus Login Dulu.')">
@@ -322,55 +322,5 @@
   </div>
   <!-- end testimonial -->
 
-<!-- <div class="modal fade" id="edit{{$kamar->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Form Booking</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{route('booking.store')}}" method="post" enctype="multipart/form-data">
-            <input name="kos_id" value="{{$kos->id}}" type="hidden">
-            <input name="kamar_id" value="{{$kamar->id}}" type="hidden">
-            <input type="hidden" value="{{$kamar->biaya_perbulan}}" name="biaya">
-            @csrf
-            <div class="form-group">
-                <label for="mulai_sewa">Mulai Sewa</label>
-                <input required type="date" class="form-control" id="mulai_sewa" name="mulai_sewa">
-            </div>
-            <div class="form-group">
-                <label for="habis_sewa">Hingga</label>
-                <input required type="date" class="form-control" id="habis_sewa" name="habis_sewa">
-            </div>
-            <div class="form-group">
-                <label for="bukti_bayar">Bukti Pembayaran DP</label>
-                <input required type="file" class="form-control" id="bukti_bayar" name="bukti_bayar">
-            </div>
-            <div class="form-group">
-                <label for="bank_id">Kirim Ke Rekening</label>
-                <select name="bank_id" id="bank_id" class="form-control">
-                    <option value="0" disabled selected>Pilih Rekening</option>
-                    @foreach($banks  as $bank)
-                      <option value="{{$bank->id}}">{{$bank->nama_bank}} - {{$bank->no_rek}} an {{$bank->nama_nasabah}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-              <div class="custom-control custom-checkbox">
-                <input required type="checkbox" name="agree" class="custom-control-input" id="agree">
-                <label class="custom-control-label text-muted" for="agree" style="font-size: 12px;">Booking harus dilakukan dengan DP 50%</label>
-              </div>
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div> -->
+
 @endsection

@@ -28,7 +28,7 @@
                         <div class="col-4">
                         <div class="card" style="width: 20rem;">
                         <div class="gallery-container">
-                            <img class="card-img-top" src="{{Storage::url($kos->kos->gallery->first()->gambar ?? '')}}" alt="Foto belum ada">
+                            <img class="card-img-top" src="{{Storage::url($kos->kos->gallery->first()->gambar ?? '')}}" alt="Foto belum ada" style="height:250px;">
                             <a href="{{route('delete.kos-tersimpan',$kos->id)}}" class="delete-gallery" onclick="return confirm('Yakin ingin menghapus {{$kos->nama_kos}} ?')">
                                 <img src="/backend/assets/img/icon-delete.svg">
                             </a>
@@ -39,7 +39,7 @@
                                 <div class="text-success">
                                 <h6>{{$kos->kos->nama_kos}}</h6>
                                 <div class="text-muted mb-3">
-                                    Disimpan pada : {{date('D-M-Y'.strtotime($kos->created_at))}}
+                                    Disimpan pada : <br> {{date('D-M-Y',strtotime($kos->created_at))}}
                                 </div>
                             </div>
                             </div>
@@ -54,11 +54,6 @@
                       </div>
                     </div>
                     @endforelse
-                    <div class="row">
-                      <div class="col-12 text-center mt-4">
-                      {{$kos->links()}}
-                      </div>
-                    </div>
                 </div>
             <!--  -->
             </div>
