@@ -14,7 +14,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = Bank::all();
+        $banks = Bank::where('user_id', \Auth::user()->id)->get();
         return view('pages.dashboard.bank.index', compact('banks'));
     }
 
@@ -39,6 +39,7 @@ class BankController extends Controller
 
         $data = $request->all(); 
         $data['status'] = 'aktif';
+        $data['user_id'] = \Auth::user()->id;
         Bank::create($data);
         return redirect()->back()->with('status','Nomor Rekening Berhasil Ditambahkan.');
     }

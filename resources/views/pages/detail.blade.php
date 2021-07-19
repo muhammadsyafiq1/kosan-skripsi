@@ -1,7 +1,7 @@
 @extends('layouts.landingPage')
 
 @section('title')
-    Home
+    Detail Kos {{$kos->slug}}
 @endsection
 
 @section('content')
@@ -39,25 +39,28 @@
         <div class="col-sm-12 mb-4">
           <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
             <div class="carousel-item-b">
-              <img src="{{Storage::url($kos->gallery->first()->gambar ?? '')}}" alt="">
+              <img src="{{Storage::url($kos->gallery->first()->gambar ?? '')}}" alt="" class="w-100">
             </div>
             @foreach($kos->gallery as $gallery)
               <div class="carousel-item-b">
-                <img src="{{Storage::url($gallery->gambar)}}" alt="">
+                <img src="{{Storage::url($gallery->gambar)}}" alt="" class="w-100">
               </div>
             @endforeach
           </div>
           <div class="row justify-content-between">
             <div class="col-md-5 col-lg-4">
-              <div class="property-price d-flex justify-content-center foo">
-                <div class="card-header-c d-flex">
-                  <div class="card-box-ico">
-                    <span class="ion-money">$</span>
-                  </div>
-                  <div class="card-title-c align-self-center">
-                    <h5 class="title-c">15000</h5>
-                  </div>
-                </div>
+              <div class="property-price ">
+                <a class="btn btn-block btn-sm btn-success mb-2 text-white"><i class="fa fa-phone"></i> Hubungi</a> 
+                @auth
+                  <form action="{{route('kos-tersimpan.store')}}" method="post">
+                  @csrf
+                    <input type="hidden" name="kos_id" value="{{$kos->id}}">
+                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                    <button type="submit" class="btn btn-block btn-sm btn-light"><i class="fa fa-heart"></i> Simpan</button>
+                  </form>
+                @else
+                <a href="{{route('login')}}" onClick="return confirm('Silahkan Login Dulu')" type="submit" class="btn btn-block btn-sm btn-light"><i class="fa fa-heart"></i> Simpan</a>
+                @endauth
               </div>
               <div class="property-summary">
                 <div class="row">
@@ -77,6 +80,20 @@
                       <strong>Alamat:</strong>
                       <span>{{$kos->alamat}}</span>
                     </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Booking:</strong>
+                      @if($kos->is_booking == 1 )
+                      <span>Tersedia</span>
+                      @else
+                      <span>Tidak Tersedia</span>
+                      @endif
+                    </li>
+                    @if($kos->biaya_booking)
+                    <li class="d-flex justify-content-between">
+                      <strong>Biaya Boking:</strong>
+                      <span>{{$kos->biaya_booking}}</span>
+                    </li>
+                    @endif
                     <li class="d-flex justify-content-between">
                       <strong>Jenis Kos:</strong>
                       <span>{{$kos->type_kos}}</span>
@@ -145,12 +162,32 @@
               </div>
             </div>
           </div>
-          @foreach($kos->kamar as $kamar)
+          @forelse($kos->kamar as $kamar)
             <div class="card shadow mb-5">
               <div class="card-body">
                 <div class="row mb-5">
                   <div class="col-md-6 col-lg-5">
-                    <img src="/frontend/img/slide-2.jpg" alt="" class="w-100 rounded">
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img class="d-block w-100" src="{{ Storage::url($kamar->galleryKamar->first()->gambar ?? '') }}" alt="First slide">
+                        </div>
+                        @foreach ($kamar->galleryKamar as $galleryKamar)
+                        <div class="carousel-item">
+                          <img class="d-block w-100" src="{{ Storage::url($galleryKamar->gambar?? '') }}" alt="">
+                        </div>
+                        @endforeach
+                      </div>
+<!--  -->
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon text-dark" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
                   </div>
                   <div class="col-md-6 col-lg-5">
                     <div class="mb-4">
@@ -181,8 +218,7 @@
                         </div>
                         <div class="col-4">
                           {{$kamar->luas_kamar}}
-                        </div>
-                      </div>
+                        </div></div>
                       <div class="row">
                         <div class="col-5">
                           Ukuran kamar
@@ -198,26 +234,38 @@
                     <div class="row mt-5 container">
                       <p class="text-muted" style="font-weight: bold;">Fasilitas kamar &nbsp; : &nbsp;</p>
                       <div class="col-12 amenities-list color-text-a">
-                        <ul class="list-a no-margin">
-                          <li>Pria & Wanita</li>
-                          <li>Tersedia Dapur</li>
-                          <li>Kolam renang</li>
-                          <li>Jam bertamu bebas</li>
-                          <li>Internet</li>
-                          <li>Parking</li>
-                          <li>Sun Room</li>
-                          <li>Boleh bawa peliharaan</li>
+                        <ul>
+                          @foreach($kamar->fasilitas as $fasilitas)
+                            <li>{{$fasilitas->nama_fasilitas}} </li>
+                          @endforeach
                         </ul>
                       </div>
                     </div>
                   </div> 
                 </div>
-                <div class=" btn-block btn-sm btn-warning text-center ">
-                  Rp. {{number_format($kamar->biaya_perbulan)}} / <span class="text-muted">Bulan</span>
+                <div class=" btn-block btn-sm btn-warning text-center text-white">
+                  Rp. {{number_format($kamar->biaya_perbulan)}} / <span class="text-white b;l t6yukaq ">Bulan</span>
                 </div>
+                @auth
+                  
+                  <a href="{{url('booking/' . $kos->id . '/' . $kamar->id . '/')}}" class=" btn-block btn-sm btn-primary text-center">
+                    <span class="text-white">Booking</span>
+                  </a>
+                  
+                @else
+                 
+                  <a class=" btn-block btn-sm btn-primary text-center" href="{{route('login')}}"onClick="return confirm('Anda Harus Login Dulu.')">
+                    <span class="text-white">Booking</span>
+                  </a>
+                  
+                @endauth
               </div>
             </div>
-          @endforeach
+          @empty
+          <div class="row">
+            <div class=" col-12 alert alert-warning text-center"> Kamar Tidak Tersedia</div>
+          </div>
+          @endforelse
         </div>
         <!-- end pilihan kamar -->
       </div>
@@ -245,13 +293,84 @@
   <div class="row" style="margin-bottom:50px;">
     <div class="container">
         <hr>
-        <h5 style="font-style:italic;">Apa Yang Mereka Katakan ?</h5>
+        <h5 style="font-style:italic;" class="mb-4">Apa Yang Mereka Katakan ?</h5>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <p>"This company is the best. I am so happy with the result!"<br><span style="font-style:normal;">- Larry Poge</span></p>
+          @forelse($kos->testimonial as $testimonial)
+          <div class="row">
+            <div class="col-1">
+            @if ($testimonial->user->avatar)
+                <img src="{{ Storage::url($testimonial->user->avatar) }}" class="rounded-circle mr-1" height="60">
+            @else
+                <img src="https://ui-avatars.com/api/?name={{ $testimonial->user->name }}" height="60" class="rounded-circle mr-1" />
+            @endif
+            </div>
+            <div class="col">
+            <p>"{{$testimonial->testimonial}}"<br><span style="font-style:normal;">- {{$testimonial->user->name}}</span></p>
+            </div>
+          </div>
+          @empty
+          <div class="row">
+              <div class=" col-12 alert alert-warning text-center">
+                    Belum Ada Testimonial
+              </div>
+          </div>
+          @endforelse
         </div>
       </div>
     </div>
   </div>
   <!-- end testimonial -->
+
+<!-- <div class="modal fade" id="edit{{$kamar->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Form Booking</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route('booking.store')}}" method="post" enctype="multipart/form-data">
+            <input name="kos_id" value="{{$kos->id}}" type="hidden">
+            <input name="kamar_id" value="{{$kamar->id}}" type="hidden">
+            <input type="hidden" value="{{$kamar->biaya_perbulan}}" name="biaya">
+            @csrf
+            <div class="form-group">
+                <label for="mulai_sewa">Mulai Sewa</label>
+                <input required type="date" class="form-control" id="mulai_sewa" name="mulai_sewa">
+            </div>
+            <div class="form-group">
+                <label for="habis_sewa">Hingga</label>
+                <input required type="date" class="form-control" id="habis_sewa" name="habis_sewa">
+            </div>
+            <div class="form-group">
+                <label for="bukti_bayar">Bukti Pembayaran DP</label>
+                <input required type="file" class="form-control" id="bukti_bayar" name="bukti_bayar">
+            </div>
+            <div class="form-group">
+                <label for="bank_id">Kirim Ke Rekening</label>
+                <select name="bank_id" id="bank_id" class="form-control">
+                    <option value="0" disabled selected>Pilih Rekening</option>
+                    @foreach($banks  as $bank)
+                      <option value="{{$bank->id}}">{{$bank->nama_bank}} - {{$bank->no_rek}} an {{$bank->nama_nasabah}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                <input required type="checkbox" name="agree" class="custom-control-input" id="agree">
+                <label class="custom-control-label text-muted" for="agree" style="font-size: 12px;">Booking harus dilakukan dengan DP 50%</label>
+              </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div> -->
 @endsection

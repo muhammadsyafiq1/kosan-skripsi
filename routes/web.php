@@ -18,6 +18,10 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/detail/{slug}', [App\Http\Controllers\HomeController::class, 'detail'])->name('kos.detail');
+Route::get('semua-kos-tersedia',[App\Http\Controllers\HomeController::class, 'kosKosan'])->name('semua-kos-tersedia');
+Route::get('/blog/{slug}', [App\Http\Controllers\HomeController::class, 'detailBlog'])->name('blog.detail');
+Route::get('lihat-semua-blog', [App\Http\Controllers\HomeController::class, 'lihatSemuaBlog'])->name('lihat-semua-blog');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
     Route::resource('user', App\Http\Controllers\UserController::class);
@@ -31,7 +35,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('kos-tersimpan',App\Http\Controllers\KosTersimpanController::class);
     Route::resource('gambar-kamar',App\Http\Controllers\GambarKamarController::class);
     Route::resource('blog',App\Http\Controllers\BlogController::class);
+    Route::resource('booking',App\Http\Controllers\BookingController::class);
 
+    Route::get('booking/{idKos}/{idKamar}/', [App\Http\Controllers\HomeController::class, 'getBooking']);
+    Route::get('terima-booking/{idKamar}/{idBooking}/', [App\Http\Controllers\BookingController::class, 'terimaBooking'])->name('terima.booking');
+    Route::get('tolak-booking/{idKamar}/{idBooking}/', [App\Http\Controllers\BookingController::class, 'tolakBooking'])->name('tolak.booking');
+    Route::get('booking-kos-masuk', [App\Http\Controllers\BookingController::class, 'bookinganKosMasuk'])->name('booking-kos-masuk');
+    Route::get('riwayat-kos-saya', [App\Http\Controllers\BookingController::class, 'bookinganSaya'])->name('riwayat-kos-saya');
     Route::get('semua-kos',[App\Http\Controllers\KosController::class, 'tableKos'])->name('semua-kos');
     Route::get('aktifkan-kos/{id}',[App\Http\Controllers\KosController::class, 'aktifkan'])->name('kos.aktifkan');
     Route::get('nonaktifkan-kos/{id}',[App\Http\Controllers\KosController::class, 'nonaktifkan'])->name('kos.nonaktifkan');

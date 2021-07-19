@@ -8,7 +8,7 @@
     <!--/ Carousel Star /-->
   <div class="intro intro-carousel">
     <div id="carousel" class="owl-carousel owl-theme">
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url('{{Storage::url($kos->gallery->first()->gambar ?? '')}}')">
+      <div class="carousel-item-a intro-item bg-image" style="width:100%; background-image: url('{{Storage::url($kos->gallery->first()->gambar ?? '')}}')">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
@@ -17,11 +17,11 @@
                 <div class="col-lg-8">
                   <div class="intro-body">
                     <p class="intro-title-top">{{$kos->alamat}}
-                      <br> {{date('D-m-Y',strtotime($kos->created_at))}}</p>
+                      <br> Terakhir Update :  {{date('D-m-Y',strtotime($kos->created_at))}}</p>
                     <h1 class="intro-title mb-4">
                     <span class="">{{$kos->nama_kos}} </span> 
                     <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">Detail</span></a>
+                      <a href="{{route('kos.detail',$kos->slug)}}"><span class="price-a">Detail</span></a>
                     </p>
                   </div>
                 </div>
@@ -30,52 +30,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="carousel-item-a intro-item bg-image" style="background-image: url(/frontend/img/slide-2.jpg)">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Rino
-                      <br> Venda Road Five</h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url(/frontend/img/slide-3.jpg)">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Alira
-                      <br> Roan Road One</h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
   <!--/ Carousel end /-->
@@ -159,7 +113,7 @@
               <h2 class="title-a">Kos-kosan Terbaru</h2>
             </div>
             <div class="title-link">
-              <a href="property-grid.html">Lihat semua Kosan
+              <a href="{{route('semua-kos-tersedia')}}">Lihat semua Kosan
                 <span class="ion-ios-arrow-forward"></span>
               </a>
             </div>
@@ -168,35 +122,30 @@
       </div>
       <div id="property-carousel" class="owl-carousel owl-theme">
         @foreach($kosan as $kos)
-          @php $kamarKosong = $kos->kamar->where('status','=','tersedia')->count(); @endphp
+        @php $kamarKosong = $kos->kamar->where('status','=','tersedia')->count(); @endphp
         @if($kamarKosong > 0)
         <div class="carousel-item-b">
-            <div class="card-box-a card-shadow">
-              <div class="img-box-a">
-                <img src="{{Storage::url($kos->gallery->first()->gambar ?? '')}}" alt="" class="img-a img-fluid">
-              </div>
-              <div class="card-overlay">
-                <div class="card-overlay-a-content">
-                  <div class="card-header-a">
-                    <h2 class="card-title-a">
-                      <a href="property-single.html">{{$kos->nama_kos}}
-                    </h2>
-                  </div>
-                  <div class="card-body-a">
-                    <div class="price-box d-flex">
-                      <!-- <span class="price-a"> -->
-                        <a href="{{route('kos.detail',$kos->slug)}}">
-                          <span class="price-a">
-                            Detail
-                          </span>
-                        </a>
-                      <!-- </span> -->
-                    </div> <br>
-                    <span class="text-white" style="font-size:14px;">Last updated : {{date('d M. Y',strtotime($kos->updated_at))}}</span>
-                    <a href="#" class="link-a">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="{{Storage::url($kos->gallery->first()->gambar ?? '')}}" style="height:400px;" class="w-100 img-a img-fluid">
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="property-single.html">{{$kos->nama_kos}} </a>
+                      <br /> 
+                      <span class="text-white" style="font-size:12px; ">Lokasi: {{$kos->alamat}}</span>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <a class="price-a" href="{{route('kos.detail',$kos->slug)}}">
+                      Detail
                     </a>
                   </div>
-                  <div class="card-footer-a">
+                </div>
+                <div class="card-footer-a">
                     <ul class="card-info d-flex justify-content-around">
                       <li>
                         <h4 class="card-info-title">Kamar Kosong</h4>
@@ -204,7 +153,6 @@
                         <span> {{$k}}</span>
                       </li>
                       @foreach($kos->fasilitas as $fasilitas)
-                      <!--  -->
                       <li>
                         <h4 class="card-info-title">{{$fasilitas->nama_fasilitas == 'penjaga' ? 'Penjaga' : ''}}</h4>
                         <span>{{$fasilitas->nama_fasilitas == 'penjaga' ? 'Tersedia' : ''}}</span>
@@ -215,10 +163,10 @@
                       </li>
                       @endforeach
                     </ul>
-                  </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
         @endif
         @endforeach
@@ -245,98 +193,30 @@
         </div>
       </div>
       <div id="new-carousel" class="owl-carousel owl-theme">
+      @foreach($blogs as $blog)
         <div class="carousel-item-c">
           <div class="card-box-b card-shadow news-box">
             <div class="img-box-b">
-              <img src="/frontend/img/post-2.jpg" alt="" class="img-b img-fluid">
+              <img src="{{Storage::url($blog->gambar)}}" style="height:380px;" alt="" class="img-b img-fluid">
             </div>
             <div class="card-overlay">
               <div class="card-header-b">
                 <div class="card-category-b">
-                  <a href="#" class="category-b">House</a>
+                  <a href="#" class="category-b">{{$blog->kategori}}</a>
                 </div>
                 <div class="card-title-b">
                   <h2 class="title-2">
-                    <a href="blog-single.html">House is comming
-                      <br> new</a>
+                    <a  href="{{route('blog.detail',$blog->slug)}}">{{$blog->title}}</a>
                   </h2>
                 </div>
                 <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
+                  <span class="date-b">{{date('d M. Y',strtotime($blog->created_at))}}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="carousel-item-c">
-          <div class="card-box-b card-shadow news-box">
-            <div class="img-box-b">
-              <img src="/frontend/img/post-5.jpg" alt="" class="img-b img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-header-b">
-                <div class="card-category-b">
-                  <a href="#" class="category-b">Travel</a>
-                </div>
-                <div class="card-title-b">
-                  <h2 class="title-2">
-                    <a href="blog-single.html">Travel is comming
-                      <br> new</a>
-                  </h2>
-                </div>
-                <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item-c">
-          <div class="card-box-b card-shadow news-box">
-            <div class="img-box-b">
-              <img src="/frontend/img/post-7.jpg" alt="" class="img-b img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-header-b">
-                <div class="card-category-b">
-                  <a href="#" class="category-b">Park</a>
-                </div>
-                <div class="card-title-b">
-                  <h2 class="title-2">
-                    <a href="blog-single.html">Park is comming
-                      <br> new</a>
-                  </h2>
-                </div>
-                <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item-c">
-          <div class="card-box-b card-shadow news-box">
-            <div class="img-box-b">
-              <img src="/frontend/img/post-3.jpg" alt="" class="img-b img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-header-b">
-                <div class="card-category-b">
-                  <a href="#" class="category-b">Travel</a>
-                </div>
-                <div class="card-title-b">
-                  <h2 class="title-2">
-                    <a href="#">Travel is comming
-                      <br> new</a>
-                  </h2>
-                </div>
-                <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </section>

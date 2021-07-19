@@ -38,7 +38,9 @@ class KosTersimpanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        Kos_tersimpan::create($data);
+        return redirect()->back();
     }
 
     /**

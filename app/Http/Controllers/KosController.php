@@ -70,9 +70,12 @@ class KosController extends Controller
             'deskripsi_kos' => 'required',
             'type_kos' => 'required',
             'aturan_kos' => 'required',
+            'biaya_booking' => 'max:17'
         ]);
 
         $kos = new Kos;
+        $kos->is_booking = $request->is_booking;
+        $kos->biaya_booking = $request->biaya_booking;
         $kos->nama_kos = $request->nama_kos;
         $kos->alamat = $request->alamat;
         $kos->deskripsi_kos = $request->deskripsi_kos;

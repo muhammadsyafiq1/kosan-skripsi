@@ -46,6 +46,21 @@ class User extends Authenticatable
 
     public function kos()
     {
-        return $this->hasMany(Kos::class, 'user_id');
+        return $this->hasMany(Kos::class, 'kos_id');
+    }
+
+    public function booking()
+    {
+        return $this->hasMany(Booking::class, 'user_id');
+    }
+
+    public function testimonial()
+    {
+        return $this->hasMany(testimonial::class, 'user_id');
+    }
+
+    public function bank()
+    {
+        return $this->hasMany(Bank::class, 'user_id');
     }
 }

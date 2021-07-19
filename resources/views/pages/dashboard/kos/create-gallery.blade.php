@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Gallry Kos
+    Galley Kos
 @stop
 
 @section('content')

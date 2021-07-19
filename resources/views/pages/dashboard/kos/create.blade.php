@@ -52,6 +52,37 @@
                                 </div>
                             </div>
                         </div>
+                        <!--  -->
+                        <div class="row">
+                          <div class="form-group col-12">
+                              <span>Apakah anda ingin menggunakan fitur boking ?</span> <br>
+                                <div class="form-check">
+                              <input class="form-check-input" type="radio" name="is_booking" id="tombol_show" value="1">
+                              <label class="form-check-label" for="tombol_show">
+                                Iya
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="is_booking" id="tombol_hide" value="0">
+                              <label class="form-check-label" for="tombol_hide">
+                                Tidak
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <!--  -->
+                        <div class="row">
+                          <div class="col-12" id="box">
+                            <label for="biaya_booking">Ketentuan Booking</label>
+                            <input type="text" name="biaya_booking" class="form-control @error('biaya_booking') is-invalid @enderror" placeholder="ex: Biaya booking 100000 / 50% harga kamar">
+                            @error('biaya_booking')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                          </div>
+                        </div>
+                        <!--  -->
                         <div class="form-group">
                             <label for="type_kos">Penghuni Kos</label>
                             <select class="form-control @error('type_kos') is-invalid @enderror" name="type_kos" id="type_kos">
@@ -145,4 +176,20 @@
       });
     });
   </script>
+
+@push('scripts')
+<script>
+   $(document).ready(function() {
+  
+     $("#tombol_hide").click(function() {
+       $("#box").hide();
+     })
+  
+     $("#tombol_show").click(function() {
+       $("#box").show();
+     })
+  
+   });
+   </script>
+@endpush
 @endpush
