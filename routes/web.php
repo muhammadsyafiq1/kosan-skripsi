@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('booking',App\Http\Controllers\BookingController::class);
     Route::resource('testimonial',App\Http\Controllers\TestimonialController::class);
 
+    Route::get('success', [App\Http\Controllers\HomeController::class, 'success'])->name('success');
     Route::get('booking/{idKos}/{idKamar}/', [App\Http\Controllers\HomeController::class, 'getBooking']);
     Route::get('terima-booking/{idKamar}/{idBooking}/', [App\Http\Controllers\BookingController::class, 'terimaBooking'])->name('terima.booking');
     Route::get('tolak-booking/{idKamar}/{idBooking}/', [App\Http\Controllers\BookingController::class, 'tolakBooking'])->name('tolak.booking');

@@ -78,5 +78,10 @@ class HomeController extends Controller
         return view('pages.checkout', compact('kamar','banks'));
     }
 
+    public function success ()
+    {
+        return view('pages.success');
+    }
+
     
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Testimonial;
+use App\Models\Booking_detail;
 use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
@@ -14,7 +15,7 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        $testimonials = Testimonial::where('user_id', \Auth::user()->id)->get(); dd($testimonials);
+        $testimonials = Testimonial::where('user_id', \Auth::user()->id)->get();
         return view('pages.dashboard.testimonial.index', compact('testimonials'));
     }
 
@@ -68,9 +69,13 @@ class TestimonialController extends Controller
      * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Testimonial $testimonial)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all(); 
+        $item = Testimonial::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->back()->with('status',' Berhasil Memberi Testimonial');
     }
 
     /**

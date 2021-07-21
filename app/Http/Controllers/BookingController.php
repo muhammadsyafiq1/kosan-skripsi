@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Kamar;
 use App\Models\Booking_detail;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -63,6 +64,14 @@ class BookingController extends Controller
             'lama_sewa' => $hasil->m,
             'total_bayar' => $request->biaya * $hasil->m / 2,
         ]);
+
+        Testimonial::create([
+            'kos_id' => $request->kos_id,
+            'user_id' => \Auth::user()->id,
+            'testimonial' => '',
+        ]);
+
+        return redirect()->route('success');
     }
 
     public function bookinganSaya()
