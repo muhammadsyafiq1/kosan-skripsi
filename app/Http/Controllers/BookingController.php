@@ -65,12 +65,6 @@ class BookingController extends Controller
             'total_bayar' => $request->biaya * $hasil->m / 2,
         ]);
 
-        Testimonial::create([
-            'kos_id' => $request->kos_id,
-            'user_id' => \Auth::user()->id,
-            'testimonial' => '',
-        ]);
-
         return redirect()->route('success');
     }
 
@@ -90,8 +84,9 @@ class BookingController extends Controller
         return view('pages.dashboard.booking.pemilik.index', compact('bookingMasuk'));
     }
 
-    public function terimaBooking($idKamar, $idBooking)
+    public function terimaBooking(Request $request ,$idKamar, $idBooking, $idKos)
     {
+        // dd($request->all()); die;
         $booking = Booking::findOrFail($idBooking);
         $booking->status = 'diterima';
         $booking->save();
@@ -99,6 +94,13 @@ class BookingController extends Controller
         $kamar = Kamar::findOrFail($idKamar);
         $kamar->status = 'digunakan';
         $kamar->save();
+
+        Testimonial::create([
+            'kos_id' => $idKos,
+            'user_id' => $request->user,
+            'testimonial' => '',
+        ]);
+
 
         return redirect()->back()->with('status','Booking Berhasil Diterima');
 

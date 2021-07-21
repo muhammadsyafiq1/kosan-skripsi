@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('success', [App\Http\Controllers\HomeController::class, 'success'])->name('success');
     Route::get('booking/{idKos}/{idKamar}/', [App\Http\Controllers\HomeController::class, 'getBooking']);
-    Route::get('terima-booking/{idKamar}/{idBooking}/', [App\Http\Controllers\BookingController::class, 'terimaBooking'])->name('terima.booking');
+    Route::get('terima-booking/{idKamar}/{idBooking}/{idKos}', [App\Http\Controllers\BookingController::class, 'terimaBooking'])->name('terima.booking');
     Route::get('tolak-booking/{idKamar}/{idBooking}/', [App\Http\Controllers\BookingController::class, 'tolakBooking'])->name('tolak.booking');
     Route::get('booking-kos-masuk', [App\Http\Controllers\BookingController::class, 'bookinganKosMasuk'])->name('booking-kos-masuk');
     Route::get('riwayat-kos-saya', [App\Http\Controllers\BookingController::class, 'bookinganSaya'])->name('riwayat-kos-saya');
