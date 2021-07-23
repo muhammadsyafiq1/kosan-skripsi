@@ -21,6 +21,13 @@
             @endif
               <div class="col-12">
                 <div class="card">
+                  <div class="card-header">
+                    <div class="card-title">
+                      <a href="{{route('cetak-semua-booking')}}" class="btn btn-sm btn-danger">
+                        <i class="fa fa-print"></i> cetak
+                      </a>
+                    </div>
+                  </div>
                   <div class="card-body">
 
                     <div class="clearfix mb-3"></div>

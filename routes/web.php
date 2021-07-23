@@ -56,5 +56,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/ajax/fasilitas-kos/search', [App\Http\Controllers\FasilitasController::class, 'ajaxSearch']);
 
     Route::get('cetak-pdf/{id}', [App\Http\Controllers\BookingController::class, 'cetakPdf'])->name('cetakPdf');
+    Route::get('cetak-semua-booking', [App\Http\Controllers\BookingController::class, 'setakBookingSukses'])->name('cetak-semua-booking');
 });
 

@@ -127,6 +127,17 @@ class BookingController extends Controller
         return $pdf->stream();
     }
 
+    public function setakBookingSukses()
+    {
+
+        $bookingMasukSukses = Booking_detail::with(['booking.user','kos'])
+                ->whereHas('kos', function($kos){$kos->where('user_id', \Auth::user()->id);})
+                ->whereHas('booking', function($booking){$booking->where('status', '=','diterima');})
+                ->get();
+        $pdf = PDF::loadView('cetak_pdf_booking_sukses', compact('bookingMasukSukses'))->setPaper('a4', 'landscape');
+        return $pdf->stream();
+    }
+
     /**
      * Display the specified resource.
      *
