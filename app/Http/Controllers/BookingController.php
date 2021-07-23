@@ -7,6 +7,7 @@ use App\Models\Kamar;
 use App\Models\Booking_detail;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use PDF;
 
 class BookingController extends Controller
 {
@@ -117,6 +118,13 @@ class BookingController extends Controller
         $kamar->save();
 
         return redirect()->back()->with('status','Booking Telah Ditolak');
+    }
+
+    public function cetakPdf($id)
+    {
+        $booking_detail = Booking_detail::with('booking.user','kos.gallery','kos.user')->findOrFail($id);
+        $pdf = PDF::loadView('cetak_pdf', compact('booking_detail'))->setPaper('a4', 'landscape');
+        return $pdf->stream();
     }
 
     /**

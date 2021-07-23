@@ -39,7 +39,7 @@
                                 @php  $deadline = date('m-d-Y',strtotime($booking->booking->habis_sewa)) @endphp
                             <tr>
                                 <td>
-                                  <a href="" class="btn btn-sm btn-danger px-3">
+                                  <a href="{{route('cetakPdf',$booking->id)}}" class="btn btn-sm btn-danger px-3" target="_blank">
                                     <i class="fa fa-print"></i>
                                   </a>
                                 </td>

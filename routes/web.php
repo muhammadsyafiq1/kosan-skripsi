@@ -54,5 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('create-gallery-kamar/{id}', [App\Http\Controllers\GambarKamarController::class, 'createGalleryKamar'])->name('gallery.kamar');
     Route::get('delete-gallery-kamar/{id}', [App\Http\Controllers\GambarKamarController::class, 'deleteGalleryKamar'])->name('gallery-kamar.delete');
     Route::get('/ajax/fasilitas-kos/search', [App\Http\Controllers\FasilitasController::class, 'ajaxSearch']);
+
+    Route::get('cetak-pdf/{id}', [App\Http\Controllers\BookingController::class, 'cetakPdf'])->name('cetakPdf');
 });
 

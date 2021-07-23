@@ -51,7 +51,7 @@
           <div class="card-box-c foo">
             <div class="card-header-c d-flex">
               <div class="card-box-ico">
-                <span class="fa fa-gamepad"></span>
+                <span class="fa fa-check"></span>
               </div>
               <div class="card-title-c align-self-center">
                 <h2 class="title-c">Kos terjamin</h2>
@@ -68,7 +68,7 @@
           <div class="card-box-c foo">
             <div class="card-header-c d-flex">
               <div class="card-box-ico">
-                <span class="fa fa-usd"></span>
+                <span class="fa fa-users"></span>
               </div>
               <div class="card-title-c align-self-center">
                 <h2 class="title-c">Berbagai type kos</h2>
@@ -85,7 +85,7 @@
           <div class="card-box-c foo">
             <div class="card-header-c d-flex">
               <div class="card-box-ico">
-                <span class="fa fa-home"></span>
+                <span class="fa fa-building-o"></span>
               </div>
               <div class="card-title-c align-self-center">
                 <h2 class="title-c">Fasilitas</h2>
