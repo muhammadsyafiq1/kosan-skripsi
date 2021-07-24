@@ -144,7 +144,7 @@
                 </div>
               </div>
               <div class="amenities-list color-text-a">
-                <ol class="list-a no-margin">
+                <ol class="list-b no-margin">
                   @foreach($kos->fasilitas as $fasilitas)
                     <li>{{$fasilitas->nama_fasilitas}}</li> &middot; 
                   @endforeach

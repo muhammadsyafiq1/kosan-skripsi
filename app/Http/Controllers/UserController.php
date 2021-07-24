@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\User;
+use App\Models\User;
+use App\Models\Kos;
 use Auth;
 
 class UserController extends Controller
@@ -22,7 +23,8 @@ class UserController extends Controller
     public function myProfile()
     {
         $user = Auth::user();
-        return view('pages.dashboard.user.profile', compact('user'));
+        $jmlKos = Kos::where('user_id', \Auth::user()->id)->count();
+        return view('pages.dashboard.user.profile', compact('user','jmlKos'));
     }
 
     

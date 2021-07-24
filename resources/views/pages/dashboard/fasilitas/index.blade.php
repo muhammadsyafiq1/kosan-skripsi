@@ -34,7 +34,6 @@
                         <thead>
                             <tr>
                                 <th>Nama Fasilitas</th>
-                                <th>Icon</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -52,13 +51,13 @@
                                         </div>
                                     </form>                                   
                                 </td>
-                                <td>
+                                <!-- <td>
                                     @if ($fasilitas->icon)
                                         <img src="{{ Storage::url($fasilitas->icon) }}" class="rounded-circle mr-1" style="width:80px;">
                                     @else
                                         <img src="https://ui-avatars.com/api/?name={{ $fasilitas->nama_fasilitas }}" height="60" class="rounded-circle mr-1" />
                                     @endif
-                                </td>
+                                </td> -->
                                 <td>
                                     {{$fasilitas->keterangan}}
                                 </td>

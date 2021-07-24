@@ -122,6 +122,8 @@
       </div>
       <div id="property-carousel" class="owl-carousel owl-theme">
         @foreach($kosan as $kos)
+        @php  $jmlKamar = $kos->kamar->where('status','tersedia')->count();  @endphp
+        @if($jmlKamar > 0)
         <div class="carousel-item-b">
           <div class="card-box-a card-shadow">
             <div class="img-box-a">
@@ -166,6 +168,7 @@
             </div>
           </div>
         </div>
+        @endif
         @endforeach
       </div>
     </div>

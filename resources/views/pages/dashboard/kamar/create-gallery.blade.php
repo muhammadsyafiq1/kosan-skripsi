@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Gallry Kamar Kos
+    Gallery Kamar Kos
 @stop
 
 @section('content')

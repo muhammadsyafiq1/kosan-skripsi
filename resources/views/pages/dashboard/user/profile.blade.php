@@ -47,7 +47,7 @@
                       <div class="profile-widget-item">
                         @if($user->roles == 'pemilik')
                         <div class="profile-widget-item-label">Jumlah Kos</div>
-                        <div class="profile-widget-item-value">18</div>
+                        <div class="profile-widget-item-value">{{$jmlKos}}</div>
                         @endif
                       </div>
                     </div>
@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer text-right">
+                    <div class="card-footer text-right" style="margin-top :-20px;">
                       <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                   </form>

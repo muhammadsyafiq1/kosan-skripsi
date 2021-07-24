@@ -14,7 +14,7 @@
           </div>
           <div class="section-body">
             <div class="section-header-button mb-3">
-              <button href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add New</button>
+              <button href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Tambah Rekening</button>
             </div>
             <div class="row ">
             

@@ -40,6 +40,8 @@
           </div>
         </div>
         @foreach($kosan as $kos)
+        @php  $jmlKamar = $kos->kamar->where('status','tersedia')->count();  @endphp
+        @if($jmlKamar > 0)
         <div class="col-md-4">
             <div class="card-box-a card-shadow">
             <div class="img-box-a">
@@ -84,6 +86,7 @@
             </div>
           </div>
         </div>
+        @endif
         @endforeach
       </div>
       <div class="row mt-3">

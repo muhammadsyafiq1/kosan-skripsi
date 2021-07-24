@@ -14,13 +14,13 @@
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="{{url('/')}}">Home</a>
+            <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{url('/')}}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('semua-kos-tersedia')}}">Kos-kosan</a>
+            <a class="nav-link {{ (request()->is('semua-kos-tersedia')) ? 'active' : '' }}" href="{{route('semua-kos-tersedia')}}">Kos-kosan</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('lihat-semua-blog')}}">Semua Blog</a>
+            <a class="nav-link {{ (request()->is('lihat-semua-blog')) ? 'active' : '' }}" href="{{route('lihat-semua-blog')}}">Semua Blog</a>
           </li>
           @auth
           <li class="nav-item">
