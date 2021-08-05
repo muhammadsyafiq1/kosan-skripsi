@@ -33,6 +33,7 @@ class UserController extends Controller
         $request->validate([
             'password' => 'required|string|min:8|confirmed',
         ]);
+
         $user = User::findOrFail(Auth::user()->id);
         $user->password = \Hash::make($request->password);
         $user->save();

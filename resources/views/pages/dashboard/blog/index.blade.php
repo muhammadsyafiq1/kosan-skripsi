@@ -61,7 +61,7 @@
                                     <img src="{{Storage::url($blog->gambar)}}" alt="" style="width:100px;">
                                 </td>
                                 <td>
-                                    {{$blog->slug}}
+                                <a  href="{{route('blog.detail',$blog->slug)}}">{{$blog->title}}</a>
                                 </td>
                                 <td>
                                     {{$blog->kategori}}

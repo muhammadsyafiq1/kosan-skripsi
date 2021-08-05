@@ -24,7 +24,7 @@
 
   @include('includes.backend.scripts')
   @stack('scripts')
-
+  
   <!-- Page Specific JS File -->
 </body>
 </html>

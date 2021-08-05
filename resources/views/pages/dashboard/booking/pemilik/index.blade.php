@@ -38,6 +38,7 @@
                             <tr>
                                 <th>ID Booking</th>
                                 <th>Nama Penyewa</th>
+                                <th>Kontak Penyewa</th>
                                 <th>Nama Kos</th>
                                 <th>ID Kamar</th>
                                 <th>Bukti Bayar</th>
@@ -51,6 +52,9 @@
                                 <td>{{$booking->booking->id}}</td>
                                 <td>
                                     {{$booking->booking->user->name}}
+                                </td>
+                                <td>
+                                    {{$booking->booking->user->no_hp}}
                                 </td>
                                 <td>{{$booking->kos->nama_kos}}
                                     <div class="table-links">
@@ -77,7 +81,6 @@
                                 <!-- terima-booking/{idKost}/{idBooking} -->
                                     <a onClick="return confirm('Booking ID - {{$booking->booking->id}} Diterima ?')" href="{{url('terima-booking/' . $booking->kamar->id . '/' . $booking->booking->id . '/' . $booking->kos_id . '/')}}?user={{$booking->booking->user->id}}" class="btn  btn-sm btn-primary">Terima</a>
                                     <a onClick="return confirm('Booking ID - {{$booking->booking->id}} Ditolak ?')" href="{{url('tolak-booking/' . $booking->kamar->id . '/' . $booking->booking->id . '/')}}" class="btn  btn-sm btn-danger">Tolak</a>
-                                    <button  data-toggle="modal" data-target="#edit{{$booking->id}}" class="btn btn-success btn-sm">Detail</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -91,32 +94,6 @@
           </div>
         </section>
 
-<div class="modal fade" id="edit{{$booking->id ?? ''}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="edit{{$booking->id ?? ''}}">DETAIL BOOKING ID - {{$booking->booking->id ?? ''}} '</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table class="table table-striped">
-          <tr>
-            <th>
-              <td>ok</td>
-            </th>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 @stop
 
 @push('scripts')

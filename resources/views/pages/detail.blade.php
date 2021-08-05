@@ -50,13 +50,12 @@
           <div class="row justify-content-between">
             <div class="col-md-5 col-lg-4">
               <div class="property-price ">
-                <a class="btn btn-block btn-sm btn-success mb-2 text-white"><i class="fa fa-phone"></i> Hubungi</a> 
                 @auth
                   <form action="{{route('kos-tersimpan.store')}}" method="post">
                   @csrf
                     <input type="hidden" name="kos_id" value="{{$kos->id}}">
                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                    <button type="submit" class="btn btn-block btn-sm btn-light"><i class="fa fa-heart"></i> Simpan</button>
+                    <button type="submit" class="btn btn-block btn-sm btn-success"><i class="fa fa-list"></i> Simpan</button>
                   </form>
                 @else
                 <a href="{{route('login')}}" onClick="return confirm('Silahkan Login Dulu')" type="submit" class="btn btn-block btn-sm btn-light"><i class="fa fa-heart"></i> Simpan</a>

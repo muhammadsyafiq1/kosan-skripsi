@@ -13,6 +13,11 @@ class Kos extends Model
         'user_id','nama_kos','latitude','longitude','alamat','type_kos','aturan_kos','deskripsi_kos','luas_kos','status','slug','is_booking','biaya_booking'
     ];
 
+    public function codespacephoto()
+    {
+    	return $this->hasMany(CodespacePhoto::class,'kos_id','id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

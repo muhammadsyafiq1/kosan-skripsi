@@ -60,17 +60,24 @@
                                     {{$kos->user->name}}
                                 </td>
                                 <td class="text-warning">
-                                    {{$kos->user->no_ho}}
+                                    {{$kos->user->no_hp}}
                                 </td>
                                 <td>
                                     {{$kos->alamat}}
                                 </td>
                                 <td style="font-weight:bold;">
-                                    {{$kos->status}}
+                                    @if($kos->status == 'aktifkan')
+                                      <span class="text-success"> <i class="fa fa-check"></i></span>
+                                    @else
+                                      <span class="text-danger"> <i class="fa fa-times"></i></span>
+                                    @endif
                                 </td>
                                 <td>
-                                    <a onclick="return confirm('{{$kos->nama_kos}} Akan Diaktifkan ?')" href="{{route('kos.aktifkan',$kos->id)}}" class="btn btn-sm btn-primary">Aktifkan</a>
-                                    <a onclick="return confirm('{{$kos->nama_kos}} Akan Dinonaktifkan ?')" href="{{route('kos.nonaktifkan',$kos->id)}}" class="btn btn-sm btn-danger">Non Aktifkan</a>
+                                    @if($kos->status == 'aktifkan')
+                                      <a onclick="return confirm('{{$kos->nama_kos}} Akan Dinonaktifkan ?')" href="{{route('kos.nonaktifkan',$kos->id)}}" class="btn btn-sm btn-danger">Non Aktifkan</a>
+                                    @else
+                                      <a onclick="return confirm('{{$kos->nama_kos}} Akan Diaktifkan ?')" href="{{route('kos.aktifkan',$kos->id)}}" class="btn btn-sm btn-primary">Aktifkan</a>
+                                    @endif   
                                 </td>
                             </tr>
                             @endforeach

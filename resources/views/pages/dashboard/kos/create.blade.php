@@ -131,14 +131,38 @@
                             </div>
                         </div>
                         <div class="form-group">
-                                    <label for="deskripsi_kos">Tentang Kos</label>
-                                    <textarea class="form-control @error('deskripsi_kos') is-invalid @enderror" name="deskripsi_kos" id="deskripsi_kos"></textarea>
-                                    @error('deskripsi_kos')
+                                <label for="deskripsi_kos">Tentang Kos</label>
+                                <textarea class="form-control @error('deskripsi_kos') is-invalid @enderror" name="deskripsi_kos" id="deskripsi_kos"></textarea>
+                                @error('deskripsi_kos')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                </div>
+                                <!--  -->
+                                <div id="here-maps" class="form-group">
+                                <label for="">Pin Location</label>
+                                <div style="height: 300px" id="mapContainer"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Latitude</label>
+                                <input type="text" id="lat" class="form-control @error('latitude') is-invalid @enderror" name="latitude">
+                                @error('latitude')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
-                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Longitude</label>
+                                <input type="text" id="lng" name="longitude" class="form-control @error('longitude') is-invalid @enderror">
+                                @error('longitude')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                                <!--  -->
                             </div>
                             <button class="btn btn-sm btn-block text-center btn-success" type="submit">Submit</button>
                         </form>

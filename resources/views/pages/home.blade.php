@@ -195,6 +195,7 @@
       <div id="new-carousel" class="owl-carousel owl-theme">
       @foreach($blogs as $blog)
         <div class="carousel-item-c">
+        
           <div class="card-box-b card-shadow news-box">
             <div class="img-box-b">
               <img src="{{Storage::url($blog->gambar)}}" style="height:380px;" alt="" class="img-b img-fluid">
