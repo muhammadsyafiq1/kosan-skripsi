@@ -140,12 +140,12 @@
                                 @enderror
                                 </div>
                                 <!--  -->
-                                <div id="here-maps" class="form-group">
+                            <div id="here-maps" class="form-group">
                                 <label for="">Pin Location</label>
                                 <div style="height: 300px" id="mapContainer"></div>
                             </div>
                             <div class="form-group">
-                                <label for="">Latitude</label>
+                                <label for="lat">Latitude</label>
                                 <input type="text" id="lat" class="form-control @error('latitude') is-invalid @enderror" name="latitude">
                                 @error('latitude')
                                     <span class="invalid-feedback" role="alert">
@@ -154,7 +154,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Longitude</label>
+                                <label for="lng">Longitude</label>
                                 <input type="text" id="lng" name="longitude" class="form-control @error('longitude') is-invalid @enderror">
                                 @error('longitude')
                                     <span class="invalid-feedback" role="alert">
@@ -201,19 +201,31 @@
     });
   </script>
 
-@push('scripts')
+  <script>
+    $(document).ready(function() {
+    
+      $("#tombol_hide").click(function() {
+        $("#box").hide();
+      })
+    
+      $("#tombol_show").click(function() {
+        $("#box").show();
+      })
+    
+    });
+  </script>
+
 <script>
-   $(document).ready(function() {
-  
-     $("#tombol_hide").click(function() {
-       $("#box").hide();
-     })
-  
-     $("#tombol_show").click(function() {
-       $("#box").show();
-     })
-  
-   });
-   </script>
+        window.action = "submit"
+        // jQuery(document).ready(function () {
+        //     jQuery(".btn-add").click(function () {
+        //         let markup = jQuery(".invisible").html();
+        //         jQuery(".increment").append(markup);
+        //     });
+        //     jQuery("body").on("click", ".btn-remove", function () {
+        //         jQuery(this).parents(".input-group").remove();
+        //     })
+        // })
+    </script>
 @endpush
-@endpush
+

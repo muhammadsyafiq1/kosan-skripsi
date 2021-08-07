@@ -70,7 +70,9 @@ class KosController extends Controller
             'deskripsi_kos' => 'required',
             'type_kos' => 'required',
             'aturan_kos' => 'required',
-            'biaya_booking' => 'max:17'
+            'biaya_booking' => 'max:17',
+            'latitude' => 'required',
+            'longitude' => 'required'
         ]);
 
         $kos = new Kos;
@@ -78,6 +80,8 @@ class KosController extends Controller
         $kos->biaya_booking = $request->biaya_booking;
         $kos->nama_kos = $request->nama_kos;
         $kos->alamat = $request->alamat;
+        $kos->latitude = $request->latitude;
+        $kos->longitude = $request->longitude;
         $kos->deskripsi_kos = $request->deskripsi_kos;
         $kos->type_kos = $request->type_kos;
         $kos->luas_kos = $request->luas_kos;
