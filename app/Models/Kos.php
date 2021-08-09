@@ -21,18 +21,18 @@ class Kos extends Model
     public function getKos($latitude, $longitude, $radius)
     {
         return $this->select('kos.*')
-        ->selectRaw(
-            '( 6371 * 
-                acos( cos( radians(?) ) *
-                    cos(radians(latitude)) *
-                    cos(radians(longitude)- radians (?)) +
-                    cos(radians(?) ) *
-                    sin(radians(latitude) )
-                )
-            ) AS distance', [$latitude, $longitude, $radius]
-        )
-        ->havingRaw("distance < ?", [$radius])
-        ->orderBy('distance', 'asc');
+            ->selectRaw(
+                '( 6371 *
+                    acos( cos( radians(?) ) *
+                        cos( radians( latitude ) ) *
+                        cos( radians(longitude ) - radians(?)) +
+                        sin( radians(?) ) *
+                        sin( radians( latitude ) )
+                    )
+                ) AS distance', [$latitude, $longitude, $latitude]
+            )
+            ->havingRaw("distance < ?", [$radius])
+            ->orderBy('distance', 'asc');            
     }
 
     public function user()
