@@ -39,12 +39,6 @@ class HomeController extends Controller
         return view('pages.home', compact('kosan','kos','blogs'));
     }
 
-    public function detail ($slug)
-    {
-        $kos = Kos::with('kamar.galleryKamar','user.bank')->where('slug', $slug)->first(); 
-        $banks = Bank::where('user_id', $kos->user_id)->get();
-        return view('pages.detail', compact('kos','banks'));
-    }
 
     public function kosKosan(Request $request)
     {
@@ -81,6 +75,11 @@ class HomeController extends Controller
     public function success ()
     {
         return view('pages.success');
+    }
+
+    public function browse()
+    {
+        return view('pages.browseMaps');
     }
 
     

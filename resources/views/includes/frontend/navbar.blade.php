@@ -17,10 +17,13 @@
             <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{url('/')}}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('semua-kos-tersedia')) ? 'active' : '' }}" href="{{route('semua-kos-tersedia')}}">Kos-kosan</a>
+            <a class="nav-link {{ (request()->is('object-kos')) ? 'active' : '' }}" href="{{route('object-kos.index')}}">Kos-kosan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ (request()->is('lihat-semua-blog')) ? 'active' : '' }}" href="{{route('lihat-semua-blog')}}">Semua Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ (request()->is('browse')) ? 'active' : '' }}" href="{{route('browse')}}">Browse Kos</a>
           </li>
           @auth
           <li class="nav-item">

@@ -21,7 +21,8 @@
                     <h1 class="intro-title mb-4">
                     <span class="">{{$kos->nama_kos}} </span> 
                     <p class="intro-subtitle intro-price">
-                      <a href="{{route('kos.detail',$kos->slug)}}"><span class="price-a">Detail</span></a>
+                      <!-- <a href="{{route('kos.detail',$kos->slug)}}"><span class="price-a">Detail</span></a> -->
+                      <a href="#" onclick="openDirection({{ $kos->latitude }}, {{ $kos->longitude }}, {{ $kos->id }})" class="price-a">Detail</a>
                     </p>
                   </div>
                 </div>
@@ -41,7 +42,7 @@
         <div class="col-md-12">
           <div class="title-wrap d-flex justify-content-between">
             <div class="title-box">
-              <h2 class="title-a">Kenapa memilih kami ?</h2>
+              <h4>Kenapa memilih kami ?</h4>
             </div>
           </div>
         </div>
@@ -51,10 +52,10 @@
           <div class="card-box-c foo">
             <div class="card-header-c d-flex">
               <div class="card-box-ico">
-                <span class="fa fa-check"></span>
+                <span class="fa fa-check text-success"></span>
               </div>
               <div class="card-title-c align-self-center">
-                <h2 class="title-c">Kos terjamin</h2>
+                <h4>Kos terjamin</h4>
               </div>
             </div>
             <div class="card-body-c">
@@ -68,10 +69,10 @@
           <div class="card-box-c foo">
             <div class="card-header-c d-flex">
               <div class="card-box-ico">
-                <span class="fa fa-users"></span>
+                <span class="fa fa-users text-success"></span>
               </div>
               <div class="card-title-c align-self-center">
-                <h2 class="title-c">Berbagai type kos</h2>
+                <h4>Berbagai type kos</h4>
               </div>
             </div>
             <div class="card-body-c">
@@ -85,10 +86,10 @@
           <div class="card-box-c foo">
             <div class="card-header-c d-flex">
               <div class="card-box-ico">
-                <span class="fa fa-building-o"></span>
+                <span class="fa fa-building-o text-success"></span>
               </div>
               <div class="card-title-c align-self-center">
-                <h2 class="title-c">Fasilitas</h2>
+                <h4>Fasilitas</h4>
               </div>
             </div>
             <div class="card-body-c">
@@ -110,10 +111,10 @@
         <div class="col-md-12">
           <div class="title-wrap d-flex justify-content-between">
             <div class="title-box">
-              <h2 class="title-a">Kos-kosan Terbaru</h2>
+              <h4>Kos-kosan Terbaru</h4>
             </div>
             <div class="title-link">
-              <a href="{{route('semua-kos-tersedia')}}">Lihat semua Kosan
+              <a href="{{route('object-kos.index')}}">Lihat semua Kosan
                 <span class="ion-ios-arrow-forward"></span>
               </a>
             </div>
@@ -132,17 +133,18 @@
             <div class="card-overlay">
               <div class="card-overlay-a-content">
                 <div class="card-header-a">
-                  <h2 class="card-title-a">
+                  <h4 class="card-title-a">
                     <a href="property-single.html">{{$kos->nama_kos}} </a>
                       <br /> 
                       <span class="text-white" style="font-size:12px; ">Lokasi: {{$kos->alamat}}</span>
-                  </h2>
+                  </h4>
                 </div>
                 <div class="card-body-a">
                   <div class="price-box d-flex">
-                    <a class="price-a" href="{{route('kos.detail',$kos->slug)}}">
+                    <!-- <a class="price-a" href="{{route('kos.detail',$kos->slug)}}">
                       Detail
-                    </a>
+                    </a> -->
+                    <a href="#" onclick="openDirection({{ $kos->latitude }}, {{ $kos->longitude }}, {{ $kos->id }})" class="price-a">Detail</a>
                   </div>
                 </div>
                 <div class="card-footer-a">
@@ -182,7 +184,7 @@
         <div class="col-md-12">
           <div class="title-wrap d-flex justify-content-between">
             <div class="title-box">
-              <h2 class="title-a">Latest News</h2>
+              <h4>Latest News</h4>
             </div>
             <div class="title-link">
               <a href="blog-grid.html">All News
@@ -206,9 +208,9 @@
                   <a href="#" class="category-b">{{$blog->kategori}}</a>
                 </div>
                 <div class="card-title-b">
-                  <h2 class="title-2">
+                  <h4 class="title-2">
                     <a  href="{{route('blog.detail',$blog->slug)}}">{{$blog->title}}</a>
-                  </h2>
+                  </h4>
                 </div>
                 <div class="card-date">
                   <span class="date-b">{{date('d M. Y',strtotime($blog->created_at))}}</span>

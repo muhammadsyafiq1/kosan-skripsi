@@ -10,17 +10,17 @@
       <div class="row">
         <div class="col-md-12 col-lg-8">
           <div class="title-single-box">
-            <h4 class="title-single">Semua Kos-kosan Juragan Kos</h4>
+            <h6>Semua Kos-kosan Juragan Kos</h6>
           </div>
         </div>
         <div class="col-md-12 col-lg-4">
           <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="{{route('home')}}">Home</a>
+                <a href="{{url('/')}}">Home</a>
               </li>
               <li class="breadcrumb-item" aria-current="page">
-                <a href="{{route('semua-kos-tersedia')}}">Semua Kos</a>
+                <a href="{{route('object-kos.index')}}">Semua Kos</a>
               </li>
             </ol>
           </nav>
@@ -34,7 +34,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="grid-option">
-            <form action="{{route('semua-kos-tersedia')}}">
+            <form action="{{route('object-kos.index')}}">
               <input type="text" name="keyword" placeholder="Cari alamat kos..">
             </form>
           </div>
@@ -58,9 +58,10 @@
                 </div>
                 <div class="card-body-a">
                   <div class="price-box d-flex">
-                    <a class="price-a" href="{{route('kos.detail',$kos->slug)}}">
+                    <!-- <a class="price-a" href="{{route('kos.detail',$kos->slug)}}">
                       Detail
-                    </a>
+                    </a> -->
+                    <a href="#" onclick="openDirection({{ $kos->latitude }}, {{ $kos->longitude }}, {{ $kos->id }})" class="price-a">Detail</a>
                   </div>
                 </div>
                 <div class="card-footer-a">

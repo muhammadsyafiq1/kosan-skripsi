@@ -141,7 +141,7 @@ class KosController extends Controller
             'deskripsi_kos' => 'required',
             'luas_kos' => 'nullable',
 
-        ]);
+        ]); 
 
         $kos =  Kos::findOrFail($id);
         $kos->nama_kos = $request->nama_kos;
@@ -150,8 +150,8 @@ class KosController extends Controller
         $kos->aturan_kos = $request->aturan_kos;
         $kos->deskripsi_kos = $request->deskripsi_kos;
         $kos->luas_kos = $request->luas_kos;
-
-        // $kos->biaya_supir = $request->biaya_supir;
+        $kos->latitude = $request->latitude;
+        $kos->longitude = $request->longitude;
 
         $kos->user_id = Auth::user()->id;
         $kos->slug = Str::slug($request->nama_kos);
@@ -173,4 +173,6 @@ class KosController extends Controller
         $data->delete();
         return redirect()->back()->with('status','Kos Berhasil Dihapus');
     }
+
+  
 }

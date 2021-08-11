@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/browse', [App\Http\Controllers\HomeController::class, 'browse'])->name('browse');
 Route::get('/detail/{slug}', [App\Http\Controllers\HomeController::class, 'detail'])->name('kos.detail');
-Route::get('semua-kos-tersedia',[App\Http\Controllers\HomeController::class, 'kosKosan'])->name('semua-kos-tersedia');
+// 
+// Route::get('semua-kos-tersedia',[App\Http\Controllers\HomeController::class, 'kosKosan'])->name('semua-kos-tersedia');
+Route::resource('object-kos', App\Http\Controllers\ObjectKosController::class);
+// 
 Route::get('/blog/{slug}', [App\Http\Controllers\HomeController::class, 'detailBlog'])->name('blog.detail');
 Route::get('lihat-semua-blog', [App\Http\Controllers\HomeController::class, 'lihatSemuaBlog'])->name('lihat-semua-blog');
 

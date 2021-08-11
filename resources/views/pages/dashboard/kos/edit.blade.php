@@ -26,7 +26,7 @@
                         <div class="card-title">Anda Dapat Melakukan update Kos dan Kamar.</div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{route('kos.update',$kos->id)}}" enctype="multipart/form-data">
+                        {!! Form::model($kos, ['route' => ['kos.update', $kos->id], 'method' => 'put', 'files' => true]) !!}
                             @csrf @method('put')
                             <div class="card-body">
                                 <div class="row">
@@ -107,13 +107,40 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </div>
+                                        <div class="col-12">
+                                        <div id="here-maps">
+                                                <label for="">Pin Location</label>
+                                                <div style="height: 500px" id="mapContainer"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Latitude</label>
+                                                {!! Form::text('latitude', null, ['class' => $errors->has('latitude') ? 'form-control is-invalid' : 'form-control', 'id' => 'lat']) !!}
+                                                @error('latitude')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Longitude</label>
+                                                {!! Form::text('longitude', null, ['class' => $errors->has('longitude') ? 'form-control is-invalid' : 'form-control', 'id' => 'lng']) !!}
+                                                @error('longitude')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                     <button class="btn btn-sm btn-success text-center btn-block" type="submit">
                                         Simpan
                                     </button>
                                     <a href="{{route('kos.index')}}" class="mt-2 btn btn-sm btn-block text-center btn-secondary" type="submit">Kembali</a>
                                 </div>
-                            </form>
+                                <!--  -->
+                                <!--  -->
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
@@ -297,34 +324,55 @@
 
 
 
-@push('scripts')
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- @push('scripts')
+  
 
-  <script>
-    $(document).ready(function () {
-      $('.fasilitas-kamar').select2({
-        placeholder: 'Loading ...',
-        ajax: {
-          url: "http://127.0.0.1:8000/ajax/fasilitas-kos/search",
-          delay: 450,
-          processResults: function({data}) {
-            return {
-              results: $.map(data, function (item) {
-                return {
-                  text: `${item.nama_fasilitas}`,
-                  id: item.id,
-                }
-              })
-            };
-          },
-          cache: true
-        }
-      });
+ 
+
+  
+@endpush
+
+  
+
+  @push('scripts')
+    <script>
+     $(document).ready( function () {
+        $('#table_id').DataTable();
+
     });
-  </script>
+    function thisFileUpload() {
+        document.getElementById("file").click();
+    } ; 
+    </script>
+@endpush -->
+@push('scripts')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-  <script>
+    <script>
+        $(document).ready(function () {
+        $('.fasilitas-kamar').select2({
+            placeholder: 'Loading ...',
+            ajax: {
+            url: "http://127.0.0.1:8000/ajax/fasilitas-kos/search",
+            delay: 450,
+            processResults: function({data}) {
+                return {
+                results: $.map(data, function (item) {
+                    return {
+                    text: `${item.nama_fasilitas}`,
+                    id: item.id,
+                    }
+                })
+                };
+            },
+            cache: true
+            }
+        });
+        });
+    </script>
+
+<script>
     // edit kos
     $(document).ready(function () {
       $('.fasilitas').select2({
@@ -354,19 +402,9 @@
     });
 
   </script>
-@endpush
 
-  
-
-  @push('scripts')
     <script>
-     $(document).ready( function () {
-        $('#table_id').DataTable();
-
-    });
-    function thisFileUpload() {
-        document.getElementById("file").click();
-    } ; 
+        window.action = "submit"
     </script>
 @endpush
 

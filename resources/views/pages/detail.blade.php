@@ -269,20 +269,26 @@
         <!-- end pilihan kamar -->
       </div>
       <!-- maps -->
-      <!-- <section class="contact mb-4">
+      <section class="contact mb-5">
         <div class="container">
           <div class="row">
-            <div class="col-sm-12">
-              <div class="contact-map box">
-                <div id="map" class="contact-map">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968482413!3d40.75889497932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes+Square!5e0!3m2!1ses-419!2sve!4v1510329142834"
-                    width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <div class="col-12">
+              <div class="card shadow">
+                <div class="card-body">
+                  <div class="contact-map box">
+                    <div id="map" class="contact-map">
+                        <div style="height: 500px" id="mapContainer"></div>
+                        <h6>{{ $kos->nama_kos }}</h6>
+                        <span>{{ $kos->alamat_kos }}</span>
+                      <div id="summary"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section> -->
+      </section>
       <!-- end masp -->
     </div>
   </section>
@@ -292,7 +298,7 @@
   <div class="row" style="margin-bottom:50px;">
     <div class="container">
         <hr>
-        <h5 style="font-style:italic;" class="mb-4">Apa Yang Mereka Katakan ?</h5>
+        <h6 style="font-style:italic;" class="mb-4">Apa Yang Mereka Katakan ?</h6>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           @forelse($kos->testimonial as $testimonial)
@@ -323,3 +329,10 @@
 
 
 @endsection
+
+
+@push('scripts')
+    <script>
+        window.action = "direction"
+    </script>
+@endpush
