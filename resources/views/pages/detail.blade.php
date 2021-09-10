@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-md-12 col-lg-8">
           <div class="title-single-box">
-            <h1 class="title-single">{{$kos->nama_kos}}</h1>
+            <h4 class="">{{$kos->nama_kos}}</h4>
             <span class="color-text-a">{{$kos->alamat}}</span>
           </div>
         </div>
@@ -65,7 +65,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="title-box-d section-t4">
-                      <h3 class="title-d">Informasi Kos</h3>
+                      <h4 >Informasi Kos</h4>
                     </div>
                   </div>
                 </div>
@@ -126,7 +126,7 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="title-box-d">
-                    <h3 class="title-d">Tentang Kos</h3>
+                    <h4 >Tentang Kos</h4>
                   </div>
                 </div>
               </div>
@@ -138,7 +138,7 @@
               <div class="row section-t3">
                 <div class="col-sm-12">
                   <div class="title-box-d">
-                    <h3 class="title-d">Fasilitas Kos</h3>
+                    <h4 >Fasilitas Kos</h4>
                   </div>
                 </div>
               </div>
@@ -157,7 +157,7 @@
           <div class="row section-t3">
             <div class="col-sm-12">
               <div class="title-box-d">
-                <h3 class="title-d">Pilihan Kamar</h3>
+                <h4 >Pilihan Kamar</h4>
               </div>
             </div>
           </div>
