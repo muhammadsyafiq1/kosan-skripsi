@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bank::class, 'user_id');
     }
+
+    public function socialAccounts()
+    {
+        return $this->hasMany(SocialAccount::class);
+    }
 }

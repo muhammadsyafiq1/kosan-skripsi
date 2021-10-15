@@ -23,7 +23,7 @@
             <a class="nav-link {{ (request()->is('lihat-semua-blog')) ? 'active' : '' }}" href="{{route('lihat-semua-blog')}}">Semua Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('browse')) ? 'active' : '' }}" href="{{route('browse')}}">Browse Kos</a>
+            <a class="nav-link {{ (request()->is('browse')) ? 'active' : '' }}" href="{{route('browse')}}">Browse By</a>
           </li>
           @auth
           <li class="nav-item">

@@ -41,10 +41,10 @@
       <div class="row" style="margin-top : -100px;">
         <div class="col-sm-12 section-t8">
           <div class="row">
-            <div class="col-md-6 section-md-t3">
-                <img src="{{Storage::url($kamar->galleryKamar->first()->gambar)}}" >
+            <div class="col-md-6 col-lg-6 col-sm-12 section-md-t3">
+                <img src="{{Storage::url($kamar->galleryKamar->first()->gambar)}}" width="500px">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-lg-6 col-sm-12">
                 <form action="{{route('booking.store')}}" method="post" enctype="multipart/form-data">
                     <input name="kos_id" value="{{$kamar->kos->id}}" type="hidden">
                     <input name="kamar_id" value="{{$kamar->id}}" type="hidden">

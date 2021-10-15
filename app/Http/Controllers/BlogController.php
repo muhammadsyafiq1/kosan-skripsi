@@ -42,7 +42,6 @@ class BlogController extends Controller
             'title' => 'required',
             'kategori' => 'required',
             'isi' => 'required',
-            'author' => 'required',
             'gambar' => 'image',
         ]);
 

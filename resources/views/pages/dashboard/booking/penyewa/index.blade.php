@@ -46,7 +46,8 @@
                                 <td>{{$booking->kos->nama_kos ?? 'tidak tersedia'}}
                                     <div class="table-links">
                                     <div class="bullet"></div>
-                                    <a href="{{route('kos.detail',$booking->kos->slug ?? '')}}" class="text-warning">Detail Kos</a>
+                                    {{-- <a href="{{route('kos.detail',$booking->kos->slug ?? '')}}" class="text-warning">Detail Kos</a> --}}
+                                    <a href="#" onclick="openDirection({{ $booking->kos->latitude }}, {{ $booking->kos->longitude }}, {{ $booking->kos->id }})" class="price-a">Detail</a>
                                     </div>                                
                                 </td>
                                 <td>

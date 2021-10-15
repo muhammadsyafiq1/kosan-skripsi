@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class SocialAccount extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title','gambar','slug','kategori','isi','author'
+        'user_id', 'provider_id','provider_name'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
