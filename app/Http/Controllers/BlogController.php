@@ -6,6 +6,7 @@ use App\Models\Blog;
 use Illuminate\Http\Request;
 use Str;
 use Storage;
+use App\Http\Requests\CreateBlogRequest;
 
 class BlogController extends Controller
 {
@@ -36,14 +37,8 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateBlogRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'kategori' => 'required',
-            'isi' => 'required',
-            'gambar' => 'image',
-        ]);
 
         $data = $request->all();
         $data['gambar'] = $request->file('gambar')->store('blog','public');

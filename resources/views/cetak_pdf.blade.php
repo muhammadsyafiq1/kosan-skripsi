@@ -33,7 +33,9 @@
 			<tr>
 				<td>{{$booking_detail->booking->user->name}}</td>
 				<td>
-                    {{date('d / M / Y',strtotime($booking->booking->mulai_sewa ?? ''))}} - <br>  {{date('d / M / Y',strtotime($booking->booking->habis_sewa ?? ''))}}  
+                    {{$booking_detail->booking->mulai_sewa}} - <br>
+                    {{$booking_detail->booking->habis_sewa}}  
+
                 </td>
 				<td>{{$booking_detail->lama_sewa}}</td>
 				<td>{{number_format($booking_detail->total_bayar)}}</td>

@@ -7,6 +7,8 @@ use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 use Auth;
 use Str;
+use App\Http\Requests\CreateKosRequest;
+
 
 class KosController extends Controller
 {
@@ -62,18 +64,9 @@ class KosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateKosRequest $request)
     {
         // dd($request->all()); die;
-        $request->validate([
-            'nama_kos' => 'required|max:50|min:3',
-            'deskripsi_kos' => 'required',
-            'type_kos' => 'required',
-            'aturan_kos' => 'required',
-            'biaya_booking' => 'max:17',
-            'latitude' => 'required',
-            'longitude' => 'required'
-        ]);
 
         $kos = new Kos;
         $kos->is_booking = $request->is_booking;

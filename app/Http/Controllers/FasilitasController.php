@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 use Storage;
+use App\Http\Requests\CreateFasilitasRequest;
 
 class FasilitasController extends Controller
 {
@@ -35,16 +36,19 @@ class FasilitasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateFasilitasRequest $request)
     {
-        $request->validate([
-            'nama_fasilitas' => 'required|max:20',
-        ]);
-
-        $data = $request->all();
-        $data['icon'] = $request->file('icon')->store('icon','public');
-        Fasilitas::create($data);
-        return redirect()->back()->with('status','Fasilitas Berhasil Ditambah');
+        
+        $data = $request->all(); 
+        if($request->icon){
+            $data['icon'] = $request->file('icon')->store('icon','public');
+            Fasilitas::create($data);
+            return redirect()->back()->with('status','Fasilitas Berhasil Ditambah');
+        }else{
+            Fasilitas::create($data);
+            return redirect()->back()->with('status','Fasilitas Berhasil Ditambah');
+        }
+        
     }
 
     /**

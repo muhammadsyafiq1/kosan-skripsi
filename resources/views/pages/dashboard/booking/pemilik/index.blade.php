@@ -79,8 +79,13 @@
                                 </td>
                                 <td>
                                 <!-- terima-booking/{idKost}/{idBooking} -->
+                                    @if($booking->booking->status == 'menunggu')
                                     <a onClick="return confirm('Booking ID - {{$booking->booking->id}} Diterima ?')" href="{{url('terima-booking/' . $booking->kamar->id . '/' . $booking->booking->id . '/' . $booking->kos_id . '/')}}?user={{$booking->booking->user->id}}" class="btn  btn-sm btn-primary">Terima</a>
                                     <a onClick="return confirm('Booking ID - {{$booking->booking->id}} Ditolak ?')" href="{{url('tolak-booking/' . $booking->kamar->id . '/' . $booking->booking->id . '/')}}" class="btn  btn-sm btn-danger">Tolak</a>
+                                    @elseif($booking->booking->status == 'diterima')
+                                      <i class="fa fa-check text-success"></i>
+                                    @endif
+                                    
                                 </td>
                             </tr>
                             @endforeach
