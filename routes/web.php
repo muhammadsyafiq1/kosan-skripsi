@@ -40,7 +40,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('gambar-kamar',App\Http\Controllers\GambarKamarController::class);
     Route::resource('blog',App\Http\Controllers\BlogController::class);
     Route::resource('booking',App\Http\Controllers\BookingController::class);
+    Route::post('create-testimonial-rating', [App\Http\Controllers\TestimonialController::class, 'testimonialUpdate'])->name('create-testimonial-rating');
     Route::resource('testimonial',App\Http\Controllers\TestimonialController::class);
+
 
     Route::get('success', [App\Http\Controllers\HomeController::class, 'success'])->name('success');
     Route::get('booking/{idKos}/{idKamar}/', [App\Http\Controllers\HomeController::class, 'getBooking']);

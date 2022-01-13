@@ -7,6 +7,7 @@ use App\Models\Kamar;
 use App\Models\Booking_detail;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Auth;
 use PDF;
 
 class BookingController extends Controller
@@ -100,6 +101,7 @@ class BookingController extends Controller
             'kos_id' => $idKos,
             'user_id' => $request->user,
             'testimonial' => '',
+            'stars_rated' => '',
         ]);
 
 

@@ -69,12 +69,13 @@ class TestimonialController extends Controller
      * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function testimonialUpdate(Request $request)
     {
         $data = $request->all(); 
-        $item = Testimonial::findOrFail($id);
-        $item->update($data);
-
+        $item = Testimonial::findOrFail($request->id);
+        $item->stars_rated = $request->stars_rated;
+        $item->testimonial = $request->testimonial;
+        $item->save();
         return redirect()->back()->with('status',' Berhasil Memberi Testimonial');
     }
 

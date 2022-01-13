@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kos;
 use App\Models\Bank;
+use App\Models\Testimonial;
 
 class ObjectKosController extends Controller
 {
@@ -57,7 +58,14 @@ class ObjectKosController extends Controller
         // return $request->all();
         $kos = Kos::with('kamar.galleryKamar','user.bank')->where('id', $id)->first(); 
         $banks = Bank::where('user_id', $kos->user_id)->get();
-        return view('pages.detail', compact('kos','banks'));
+        $ratings = Testimonial::where('kos_id', $kos->id)->get(); 
+        $rating_sum = Testimonial::where('kos_id', $kos->id)->sum('stars_rated'); 
+        if($ratings->count() > 0){
+            $rating_value = $rating_sum / $ratings->count();
+        }else{
+            $rating_value = 0;
+        }
+        return view('pages.detail', compact('kos','banks','rating_value','ratings'));
     }
 
     /**

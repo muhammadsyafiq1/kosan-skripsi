@@ -5,13 +5,56 @@
 @endsection
 
 @section('content')
+<style>
+  .rating-css div {
+      color: #ffe400;
+      font-size: 30px;
+      font-family: sans-serif;
+      font-weight: 800;
+      text-align: center;
+      text-transform: uppercase;
+      padding: 20px 0;
+  }
+  .rating-css input {
+      display: none;
+  }
+  .rating-css input + label {
+      font-size: 50px;
+      text-shadow: 1px 1px 0 #8f8420;
+      cursor: pointer;
+  }
+  .rating-css input:checked + label ~ label {
+      color: #b4afaf;
+  }
+  .rating-css label:active{
+      transform: scale(0.8);
+      transition: 0.3s ease;
+  }
+  .checked{
+    color: #ffd900;
+  }
+</style>
   <!--/ Intro Single star /-->
   <section class="intro-single">
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-lg-8">
           <div class="title-single-box">
-            <h4 class="">{{$kos->nama_kos}}</h4>
+            
+            <h4 class="">{{$kos->nama_kos}} - 
+            @php 
+              $ratenum = number_format($rating_value);
+            @endphp
+            @for($i = 1; $i <= $ratenum; $i++)
+              <i style="font-size: 20px;"  class="fa fa-star checked"></i> 
+            @endfor
+            @for($j = $ratenum+1; $j <= 5; $j++)
+              <i style="font-size: 20px;"  class="fa fa-star"></i>
+            @endfor 
+            <small style="font-weight:light; font-size:18px;" class="text-muted">
+             ( {{$ratings->count()}} )
+            </small>
+            </h4>
             <span class="color-text-a">{{$kos->alamat}}</span>
           </div>
         </div>
@@ -311,6 +354,9 @@
             @endif
             </div>
             <div class="col">
+            @for($i = 1; $i <= $testimonial->stars_rated; $i++)
+              <i style="font-size: 10px;"  class="fa fa-star checked"></i> 
+            @endfor
             <p>"{{$testimonial->testimonial}}"<br><span style="font-style:normal;">- {{$testimonial->user->name}}</span></p>
             </div>
           </div>
